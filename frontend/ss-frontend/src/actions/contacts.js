@@ -8,12 +8,12 @@ function fetchingInfo() {
 
 
 //add image url to be passed in later through AddNewImageForm
-export function fetchImageInfo() {
-  debugger
+export function fetchImageInfo(url) {
+  let urlString = url.toString()
   const body = JSON.stringify({"requests":[
     {"image":
       {"source":
-        {"imageUri": "https://i.imgur.com/2z2C9gC.jpg"}
+        {"imageUri": urlString}
         },
       "features":[
         {"type":"TEXT_DETECTION"}
