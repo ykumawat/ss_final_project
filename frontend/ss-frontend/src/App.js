@@ -14,6 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <ProfilesContainer />
+        <ContactsContainer />
         <Route path="/" render={(routeProps) => <Nav {...routeProps}/>}/>
       </div>
     );

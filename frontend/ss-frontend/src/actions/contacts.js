@@ -1,7 +1,13 @@
-
 function fetchingInfo() {
   return {
     type: "FETCHING_INFO"
+  }
+}
+
+function fetchedContacts(contacts) {
+  return {
+    type: "LOADED_CONTACTS",
+    payload: contacts
   }
 }
 
@@ -30,5 +36,18 @@ export function fetchImageInfo(url) {
     })
       .then((res) => res.json())
       .then((json) => console.log(json)) //change this console log to have input passed to google cloud natural lang processing api
+  }
+}
+
+export function loadUserContacts() {
+  return function(dispatch) {
+    dispatch(fetchingInfo())
+    fetch('http://localhost:3000/api/v1/users')
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json)
+      const contacts = json
+      dispatch(fetchedContacts(contacts))
+    })
   }
 }
