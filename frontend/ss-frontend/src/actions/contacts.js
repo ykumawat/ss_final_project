@@ -5,9 +5,6 @@ function fetchingInfo() {
   }
 }
 
-
-
-//add image url to be passed in later through AddNewImageForm
 export function fetchImageInfo(url) {
   let urlString = url.toString()
   const body = JSON.stringify({"requests":[
@@ -32,6 +29,6 @@ export function fetchImageInfo(url) {
       }
     })
       .then((res) => res.json())
-      .then((json) => console.log(json))
+      .then((json) => console.log(json)) //change this console log to have input passed to google cloud natural lang processing api
   }
 }

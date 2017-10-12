@@ -38,13 +38,6 @@ class AddNewImageForm extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    list: state.list,
-    isFetching: state.isFetching
-  }
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     fetchImageInfo: (url) => {
