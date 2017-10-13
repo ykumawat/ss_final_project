@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ContactActions from '../../actions/contacts'
+import ContactsList from './ContactsList'
 
 class ContactsContainer extends React.Component {
 
@@ -13,13 +14,15 @@ class ContactsContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.loadUserContacts()
-    console.log(this.props.contactList)
+    this.setState({
+      contacts: this.props.contactList
+    })
   }
 
   render() {
     return(
       <div>
+        <ContactsList contacts={this.state.contactList} />
       </div>
     )
   }
@@ -27,7 +30,6 @@ class ContactsContainer extends React.Component {
 
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     contactList: state.contacts.list
   }

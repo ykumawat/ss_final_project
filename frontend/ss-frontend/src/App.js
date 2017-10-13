@@ -13,9 +13,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ProfilesContainer />
-        <ContactsContainer />
         <Route path="/" render={(routeProps) => <Nav {...routeProps}/>}/>
+        <h2> Welcome, user!</h2>
       </div>
     );
   }

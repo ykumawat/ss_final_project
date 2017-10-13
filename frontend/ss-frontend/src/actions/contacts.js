@@ -45,7 +45,7 @@ export function loadUserContacts() {
     fetch('http://localhost:3000/api/v1/users')
     .then((res) => res.json())
     .then((json) => {
-      console.log(json)
+      console.log(json) //this returns an array of users, once auth is added in, change this function to go to "/users/me"
       const contacts = json
       dispatch(fetchedContacts(contacts))
     })
