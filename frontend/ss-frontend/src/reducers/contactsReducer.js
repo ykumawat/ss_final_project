@@ -1,4 +1,4 @@
-function contactsReducer(state = {isFetching: false, list: [{name: "Elon", company: "Tesla", email: "e@m.com", phone: "123-345-5678", note: "elon musk", url: "none"}]}, action) {
+function contactsReducer(state = {isFetching: false, list: []}, action) {
   switch(action.type) {
     case "FETCHING_INFO":
       return Object.assign({}, state, { isFetching: true})

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import AddNewFormHOC from '../hoc/AddNewFormHOC'
 import { fetchImageInfo } from '../../actions/contacts'
 import ToggleDisplay from 'react-toggle-display'
-
+import { Route, Link, withRouter } from 'react-router-dom'
 
 class ProfilesContainer extends React.Component {
 
@@ -85,4 +85,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(ProfilesContainer)
+export default withRouter(connect(null, mapDispatchToProps)(ProfilesContainer))

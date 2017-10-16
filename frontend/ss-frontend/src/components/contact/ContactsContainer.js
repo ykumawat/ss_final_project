@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as ContactActions from '../../actions/contacts'
 import ContactsList from './ContactsList'
 
+
 class ContactsContainer extends React.Component {
 
   constructor() {

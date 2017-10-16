@@ -7,12 +7,9 @@ function AddNewFormHOC(RenderedComponent, props) {
 
     }
 
-    componentWillReceiveProps(nextProps) {
-      console.log(props, nextProps)
-    }
-
     render() {
       if(props.addContact) {
+        console.log(props);
         return(
           <div>
 

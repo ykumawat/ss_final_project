@@ -4,15 +4,29 @@ import { NavLink } from 'react-router-dom'
 class Nav extends React.Component {
 
   render() {
-    return(
-      <div className="ui secondary menu">
-        <NavLink activeClassName="active" className="item" to="/home">Homepage</NavLink>
-        <NavLink activeClassName="active" className="item" to="/me">My Profile</NavLink>
-        <NavLink activeClassName="active" className="item" to="/contacts">Contacts</NavLink>
-        <NavLink activeClassName="active" className="item" to="/slides">Slides</NavLink>
-        <NavLink activeClassName="active" className="item" to="/misc">Misc</NavLink>
-      </div>
-    )
+    if (localStorage.getItem('jwtToken')) {
+      return(
+        <div className="ui secondary menu">
+          <NavLink activeClassName="active" className="item" to="/">Homepage</NavLink>
+          <NavLink activeClassName="active" className="item" to="/me">My Profile</NavLink>
+          <NavLink activeClassName="active" className="item" to="/contacts">Contacts</NavLink>
+          <NavLink activeClassName="active" className="item" to="/slides">Slides</NavLink>
+          <NavLink activeClassName="active" className="item" to="/misc">Misc</NavLink>
+          <NavLink activeClassName="active" className="right item" onClick={this.props.onLogout} to="/">Log Out</NavLink>
+        </div>
+      )
+    } else {
+      return (
+        <div className="ui secondary menu">
+          <NavLink activeClassName="active" className="item" to="/">Homepage</NavLink>
+          <NavLink activeClassName="active" className="item" to="/me">My Profile</NavLink>
+          <NavLink activeClassName="active" className="item" to="/contacts">Contacts</NavLink>
+          <NavLink activeClassName="active" className="item" to="/slides">Slides</NavLink>
+          <NavLink activeClassName="active" className="item" to="/misc">Misc</NavLink>
+          <NavLink activeClassName="active" className="right item" to="/login">Log In</NavLink>
+        </div>
+      )
+    }
   }
 }
 

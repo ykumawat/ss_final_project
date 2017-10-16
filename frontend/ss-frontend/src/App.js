@@ -4,8 +4,10 @@ import ContactsContainer from './components/contact/ContactsContainer'
 import SlidesContainer from './components/slide/SlidesContainer'
 import MiscContainer from './components/misc/MiscContainer'
 import Nav from './components/Nav'
-import Login from './components/Login'
-import { Route, Redirect } from 'react-router-dom'
+import Home from './components/Home'
+import LoginForm from './components/LoginForm'
+import SignUpForm from './components/SignUpForm'
+import { Route, Redirect, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { loginUser, logoutUser, signupUser } from './services/user'
@@ -24,12 +26,14 @@ class App extends Component {
   }
 
 
-
+// <Route exact path="/" render={(routeProps) => <Nav {...routeProps}/>}/>
   render() {
     return (
       <div className="App">
-        <Route path="/" render={(routeProps) => <Nav {...routeProps}/>}/>
-        <ProfilesContainer />
+        <Route path="/" render={(routeProps) => <Nav onLogout={this.logout} {...routeProps}/>}/>
+        <Route exact path="/" exact component={Home} />
+        <Route path="/me" component={ProfilesContainer} />
+        <Route path="/login" component={LoginForm} />
       </div>
     );
   }
@@ -46,4 +50,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(UserActions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

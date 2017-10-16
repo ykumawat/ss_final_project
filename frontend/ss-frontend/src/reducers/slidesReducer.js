@@ -1,6 +1,6 @@
 function slidesReducer(state = {isFetching: false, list: []}, action) {
   switch(action.type) {
-    case "FETCHING_USER_CONTACTS":
+    case "FETCHING_USER_SLIDES":
       return Object.assign({}, state, { isFetching: true})
 
     default:
