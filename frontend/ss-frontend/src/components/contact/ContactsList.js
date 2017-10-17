@@ -1,6 +1,6 @@
 import React from 'react'
 import ContactCard from './ContactCard'
-import { Grid } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Grid } from 'semantic-ui-react'
 
 
 const ContactsList = (props) => {

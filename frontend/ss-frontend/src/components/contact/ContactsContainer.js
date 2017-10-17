@@ -23,7 +23,9 @@ class ContactsContainer extends React.Component {
   render() {
     return(
       <div>
-        <AddNewImageForm />
+        <div style={{textAlign:"right"}}>
+          <AddNewImageForm />
+        </div>
            <Route exact path="/contacts" render={(props) => <ContactsList contacts={this.props.contactList} {...props} />}/>
       </div>
     )
