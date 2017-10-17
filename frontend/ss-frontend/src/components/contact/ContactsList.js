@@ -6,8 +6,11 @@ class ContactsList extends React.Component {
   }
 
   render() {
+    console.log("hi");
     return(
-      null
+      <div>
+        "hi"
+      </div>
     )
   }
 }

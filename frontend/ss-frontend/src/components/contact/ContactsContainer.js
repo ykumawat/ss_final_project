@@ -4,36 +4,42 @@ import { bindActionCreators } from 'redux'
 import * as ContactActions from '../../actions/contacts'
 import ContactsList from './ContactsList'
 import { Route, Link, withRouter } from 'react-router-dom'
-
+import AddNewFormHOC from '../hoc/AddNewFormHOC'
+import { Grid, List, Loader} from 'semantic-ui-react'
 
 class ContactsContainer extends React.Component {
 
-  constructor() {
-    super()
-    this.state = {
-      contacts: []
-    }
-  }
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     contacts: []
+  //   }
+  // }
 
   componentDidMount() {
-    this.props.load()
+    console.log("contacts container props: ", this.props);
+    this.props.loadUserContacts()
   }
-
-  componentWillReceiveProps(nextProps) {
-    nextProps.load()
-    console.log(nextProps);
-    if (this.state.loggedIn) {
-      this.props.loadUserContacts()
-    }
-  }
+  //
+  // componentWillReceiveProps(nextProps) {
+  //   debugger
+  //   if (this.state.isLoggedin) {
+  //     console.log(this.state);
+  //   }
+  // }
 
   render() {
     return(
       <div>
-        <ContactsList contacts={this.state.contactList} />
+        <Grid>
+          <Grid.column width={16}>
+            <AddNewFormHOC />
+          </Grid.column>
+        </Grid>
       </div>
     )
   }
+
 }
 
 

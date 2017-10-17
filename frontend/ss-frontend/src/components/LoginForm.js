@@ -4,21 +4,14 @@ import { Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import ToggleDisplay from 'react-toggle-display'
 import * as UserActions from '../actions/user'
+import
 
 class LoginForm extends React.Component {
 
-  constructor() {
-    super()
-    this.state = {
-      emailInput: "",
-      passwordInput: "",
-      user: {}
-    }
-  }
-
   handleSubmit = (event) => {
+    //TODO this.setState is async as is loginUser; could be causing some bugs
     event.preventDefault()
-    if (this.state.emailInput !== "" && this.state.passwordInput !== "") {
+    if (this.props.emailInput !== "" && this.props.passwordInput !== "") {
       this.setState({
         user: {
           email: this.state.emailInput, password: this.state.passwordInput
@@ -49,10 +42,10 @@ class LoginForm extends React.Component {
           <form onSubmit={this.handleSubmit} className="ui form">
           <div className ="center fields">
           <div className="six wide field">
-            <input type="text" value={this.state.emailInput} onChange={this.handleEmailChange} placeholder="email" />
+            <input type="text" value={this.props.emailInput} onChange={this.handleEmailChange} placeholder="email" />
           </div>
           <div className="six wide field">
-            <input type="password" value={this.state.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
+            <input type="password" value={this.props.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
           </div>
           <div className="radio">
             <h4>No Account Yet?
@@ -68,8 +61,15 @@ class LoginForm extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    emailInput: state.loginForm.emailInput,
+    passwordInput: state.loginForm.passwordInput
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(UserActions, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
