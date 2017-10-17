@@ -20,28 +20,40 @@ function loginFailure() {
 
 export function loginUser(loginParams) {
   const body = JSON.stringify(loginParams)
-  return fetch("http://localhost:3000/login", {
-    method: 'post',
-    body: body,
-    headers: {
-      "Accept": "application/json",
-      "Content-Type":"application/json"
-    }
-  })
-    .then((res) => res.json())
+  return function(dispatch) {
+    fetch("http://localhost:3000/login", {
+      method: 'post',
+      body: body,
+      headers: {
+        "Accept": "application/json",
+        "Content-Type":"application/json"
+      }
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        dispatch(loginSuccess(user))
+      })
+  }
+
 }
 
 export function signupUser(loginParams) {
   const body = JSON.stringify(loginParams)
-  return fetch("http://localhost:3000/api/v1/users", {
-    method: 'post',
-    body: body,
-    headers: {
-      "Accept": "application/json",
-      "Content-Type":"application/json"
-    }
-  })
-    .then((res) => res.json())
+  return function(dispatch) {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: 'post',
+      body: body,
+      headers: {
+        "Accept": "application/json",
+        "Content-Type":"application/json"
+      }
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        dispatch(signupUser(user))
+      })
+  }
+
 }
 
 export function logoutUser(){
