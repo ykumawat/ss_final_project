@@ -5,7 +5,7 @@ import ToggleDisplay from 'react-toggle-display'
 import { connect } from 'react-redux'
 
 
-class AddNewFormHOC extends React.Component {
+class AddNewImageForm extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -82,4 +82,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddNewFormHOC))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddNewImageForm))

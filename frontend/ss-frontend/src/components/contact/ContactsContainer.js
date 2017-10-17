@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as ContactActions from '../../actions/contacts'
 import ContactsList from './ContactsList'
 import { Route, Link, withRouter } from 'react-router-dom'
-import AddNewFormHOC from '../hoc/AddNewFormHOC'
+import AddNewImageForm from '../forms/AddNewImageForm'
 import { Grid, List, Loader} from 'semantic-ui-react'
 
 class ContactsContainer extends React.Component {
@@ -33,7 +33,7 @@ class ContactsContainer extends React.Component {
       <div>
         <Grid>
           <Grid.column width={16}>
-            <AddNewFormHOC />
+            <AddNewImageForm />
           </Grid.column>
         </Grid>
       </div>

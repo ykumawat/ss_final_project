@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { fetchImageInfo } from '../../actions/contacts'
 import ToggleDisplay from 'react-toggle-display'
 import { Route, Link, withRouter } from 'react-router-dom'
-import AddNewFormHOC from '../hoc/AddNewFormHOC'
+import AddNewImageForm from '../forms/AddNewImageForm'
 
 class ProfilesContainer extends React.Component {
 
@@ -12,7 +12,7 @@ class ProfilesContainer extends React.Component {
   render() {
     return (
       <div>
-        <AddNewFormHOC/>
+        <AddNewImageForm/>
       </div>
     )
   }

@@ -18,19 +18,6 @@ function signOutUser() {
   }
 }
 
-export function handleEmailChange(email) {
-  return {
-    type: "EMAIL_INPUT",
-    payload: email
-  }
-}
-
-export function handlePasswordChange(password) {
-  return {
-    type: "PASSWORD_INPUT",
-    payload: password
-  }
-}
 
 export function loginUser(email, password) {
   const body = JSON.stringify({email: email, password: password})
