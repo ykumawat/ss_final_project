@@ -30,11 +30,15 @@ export function loginUser(email, password) {
         "Content-Type":"application/json"
       }
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+      })
       .then((user) => {
         localStorage.setItem("jwtToken", user.jwt)
         dispatch(loginSuccess(user))
-      })
+      }).catch((error) => console.log("LOGIN FAILED", error))
   }
 
 }

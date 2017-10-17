@@ -6,6 +6,8 @@ class AuthController < ApplicationController
     if user && user.authenticate(auth_params[:password])
       jwt = Auth.issue({user: user.id.to_s})
       render json: {user: user, jwt: jwt}
+    else
+      render json: {message: "user not found"}, status: 400
     end
   end
 

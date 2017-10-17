@@ -18,15 +18,13 @@ class ApplicationController < ActionController::API
     if !logged_in?
       render json: {error: "unauthorized"}, status: 401
     else
-      render json: {message: "welcome"}, status: 201
     end
   end
 
   private
 
   def token
-    request.env["HTTP_AUTHORIZATION"].scan(/Bearer
-    (.*)$/).flatten.last
+    request.env["HTTP_AUTHORIZATION"].scan(/Bearer(.*)$/).flatten.last
   end
 
   def auth

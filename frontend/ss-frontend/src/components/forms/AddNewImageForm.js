@@ -1,9 +1,9 @@
 import React from 'react'
-import { fetchImageInfo } from '../../actions/contacts'
+import * as ContactActions from '../../actions/contacts'
 import { Route, Link, withRouter } from 'react-router-dom'
 import ToggleDisplay from 'react-toggle-display'
 import { connect } from 'react-redux'
-
+import { bindActionCreators } from 'redux'
 
 class AddNewImageForm extends React.Component {
   constructor() {
@@ -75,11 +75,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    fetchImageInfo: (url) => {
-      dispatch(fetchImageInfo(url))
-    }
-  }
+  return bindActionCreators(ContactActions, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddNewImageForm))

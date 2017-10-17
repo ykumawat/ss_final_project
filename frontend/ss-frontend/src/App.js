@@ -10,7 +10,6 @@ import SignUpForm from './components/SignUpForm'
 import { Route, Redirect, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { loginUser, logoutUser, signupUser } from './services/user'
 import * as UserActions from './actions/user'
 // NOTE: (10/11/17) add semantic for styling later on
 
@@ -26,11 +25,10 @@ class App extends Component {
   }
 
 
-// <Route exact path="/" render={(routeProps) => <Nav {...routeProps}/>}/>
   render() {
     return (
       <div className="App">
-        <Route path="/" render={(routeProps) => <Nav onLogout={this.logout} {...routeProps}/>}/>
+        <Route path="/" render={(routeProps) => <Nav onLogout={this.props.logout} {...routeProps}/>}/>
         <Route exact path="/" exact component={Home} />
         <Route path="/me" component={ProfilesContainer} />
         <Route path="/contacts" component={ContactsContainer} />

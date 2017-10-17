@@ -25,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if @user
+    if @current_user
       # something
     end
   end
@@ -35,10 +35,10 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def me
-    if @user
-      contacts = @user.contacts
-      slides = @user.slides
-      render json: {user: @user, contacts: contacts, slides: slides}, status: 201
+    if @current_user
+      contacts = @current_user.contacts
+      slides = @current_user.slides
+      render json: {user: @current_user, contacts: contacts, slides: slides}, status: 201
     else
       render json: {message: "Error"}
     end

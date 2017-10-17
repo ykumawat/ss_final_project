@@ -17,25 +17,14 @@ class ContactsContainer extends React.Component {
   // }
 
   componentDidMount() {
-    console.log("contacts container props: ", this.props);
     this.props.loadUserContacts()
   }
-  //
-  // componentWillReceiveProps(nextProps) {
-  //   debugger
-  //   if (this.state.isLoggedin) {
-  //     console.log(this.state);
-  //   }
-  // }
 
   render() {
     return(
       <div>
-        <Grid>
-          <Grid.column width={16}>
-            <AddNewImageForm />
-          </Grid.column>
-        </Grid>
+        <AddNewImageForm />
+           <Route exact path="/contacts" render={(props) => <ContactsList contacts={this.props.contactList} {...props} />}/>
       </div>
     )
   }
@@ -46,7 +35,7 @@ class ContactsContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     contactList: state.contacts.list,
-    loggedIn: state.user.userInfo.isLoggedin
+    loggedIn: state.user.isLoggedin
   }
 }
 
