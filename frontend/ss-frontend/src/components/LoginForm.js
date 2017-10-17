@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import * as UserActions from '../actions/user'
 
@@ -25,7 +26,6 @@ class LoginForm extends React.Component {
           }
         })
         this.props.signupUser(this.state.user)
-
       } else {
         this.setState({
           user: {
@@ -50,32 +50,40 @@ class LoginForm extends React.Component {
   }
 
   render(){
-    return(
-      <div>
+    // if (Object.keys(this.state.user).length === 0) {
+      return(
+        <div>
         <form onSubmit={this.handleSubmit} className="ui form">
-          <div className ="center fields">
-            <div className="six wide field">
-              <input type="text" value={this.state.emailInput} onChange={this.handleEmailChange} placeholder="email" />
-            </div>
-            <div className="six wide field">
-             <input type="password" value={this.state.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
-            </div>
-            <div className="radio">
-              <label>
-                <input type="radio" name="new" id="new" />
-                New User
-              </label>
-              <label>
-                <input type="radio" name="existing" id="existing" />
-                Existing User
-              </label>
-            </div>
-            <input type="submit"/>
-          </div>
+        <div className ="center fields">
+        <div className="six wide field">
+        <input type="text" value={this.state.emailInput} onChange={this.handleEmailChange} placeholder="email" />
+        </div>
+        <div className="six wide field">
+        <input type="password" value={this.state.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
+        </div>
+        <div className="radio">
+        <label>
+        <input type="radio" name="new" id="new" />
+        New User
+        </label>
+        <label>
+        <input type="radio" name="existing" id="existing" />
+        Existing User
+        </label>
+        </div>
+        <input type="submit"/>
+        </div>
         </form>
-      </div>
-    )
-
+        </div>
+      )
+    // } else {
+    //   return (
+    //     null
+    //   )
+      // return (
+      //   <Redirect to="/me" />
+      // )
+    // }
   }
 }
 

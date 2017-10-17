@@ -4,8 +4,8 @@ function usersReducer(state = {userInfo: {}, isLoggedIn: false, newUser: true}, 
       return Object.assign({}, state, {userInfo: action.payload, isLoggedIn: true, newUser: false})
     case "SIGN_UP_SUCCESS":
       return Object.assign({}, state, {userInfo: action.payload, isLoggedIn: true, newUser: true})
-    case "LOG_IN_FAILURE":
-      return Object.assign({}, state, {isLoggedIn: false})
+    case "LOG_OUT_SUCCESS":
+      return Object.assign({}, state, {userInfo:{}, isLoggedIn: false})
     default:
       return state
   }

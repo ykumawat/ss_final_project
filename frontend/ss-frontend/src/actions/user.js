@@ -12,9 +12,9 @@ function signupUser(user) {
   }
 }
 
-function loginFailure() {
+function signOutUser() {
   return {
-    type: "LOG_IN_FAILURE"
+    type: "LOG_OUT_SUCCESS"
   }
 }
 
@@ -31,6 +31,7 @@ export function loginUser(loginParams) {
     })
       .then((res) => res.json())
       .then((user) => {
+        localStorage.setItem("jwtToken", user.jwt)
         dispatch(loginSuccess(user))
       })
   }
@@ -50,12 +51,16 @@ export function signupUser(loginParams) {
     })
       .then((res) => res.json())
       .then((user) => {
-        dispatch(signupUser(user))
+        localStorage.setItem("jwtToken", user.jwt)
+        dispatch(signupUser(user.user))
       })
   }
 
 }
 
-export function logoutUser(){
-  localStorage.removeItem("jwtToken")
+export function logoutUser(user){
+  return function(dispatch) {
+    localStorage.removeItem("jwtToken")
+    dispatch(signOutUser())
+  }
 }
