@@ -18,8 +18,22 @@ function signOutUser() {
   }
 }
 
-export function loginUser(loginParams) {
-  const body = JSON.stringify(loginParams)
+export function handleEmailChange(email) {
+  return {
+    type: "EMAIL_INPUT",
+    payload: email
+  }
+}
+
+export function handlePasswordChange(password) {
+  return {
+    type: "PASSWORD_INPUT",
+    payload: password
+  }
+}
+
+export function loginUser(email, password) {
+  const body = JSON.stringify({email: email, password: password})
   return function(dispatch) {
     fetch("http://localhost:3000/login", {
       method: 'post',

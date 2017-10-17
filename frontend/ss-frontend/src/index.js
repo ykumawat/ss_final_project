@@ -13,10 +13,9 @@ import 'semantic-ui-css/semantic.min.css'
 import contactsReducer from './reducers/contactsReducer'
 import slidesReducer from './reducers/slidesReducer'
 import usersReducer from './reducers/usersReducer'
-import loginFormReducer from './reducers/loginFormReducer'
 import imageFormReducer from './reducers/imageFormReducer'
 
-const rootReducer = combineReducers({contacts: contactsReducer, slides: slidesReducer, user: usersReducer, loginForm: loginFormReducer, imageForm: imageFormReducer})
+const rootReducer = combineReducers({contacts: contactsReducer, slides: slidesReducer, user: usersReducer, imageForm: imageFormReducer})
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 console.log("Redux store: ", store, store.getState());
 // console.log(store.getState());

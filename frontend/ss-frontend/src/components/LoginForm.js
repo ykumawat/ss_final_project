@@ -4,33 +4,22 @@ import { Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import ToggleDisplay from 'react-toggle-display'
 import * as UserActions from '../actions/user'
-import
 
 class LoginForm extends React.Component {
 
   handleSubmit = (event) => {
-    //TODO this.setState is async as is loginUser; could be causing some bugs
     event.preventDefault()
     if (this.props.emailInput !== "" && this.props.passwordInput !== "") {
-      this.setState({
-        user: {
-          email: this.state.emailInput, password: this.state.passwordInput
-        }
-      })
-    this.props.loginUser(this.state.user)
+      this.props.loginUser(this.props.emailInput, this.props.passwordInput)
     }
   }
 
   handleEmailChange = (event) => {
-    this.setState({
-      emailInput: event.target.value
-    })
+    this.props.handleEmailChange(event.target.value)
   }
 
   handlePasswordChange = (event) => {
-    this.setState({
-      passwordInput: event.target.value
-    })
+    this.props.handlePasswordChange(event.target.value)
   }
 
   render(){
@@ -63,8 +52,8 @@ class LoginForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    emailInput: state.loginForm.emailInput,
-    passwordInput: state.loginForm.passwordInput
+    emailInput: state.user.emailInput,
+    passwordInput: state.user.passwordInput
   }
 }
 
