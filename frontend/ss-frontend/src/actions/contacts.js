@@ -42,7 +42,7 @@ export function fetchImageInfo(url) {
 export function loadUserContacts() {
   return function(dispatch) {
     dispatch(fetchingInfo())
-    fetch('http://localhost:3000/api/v1/users')
+    fetch('http://localhost:3000/api/v1/me')
     .then((res) => res.json())
     .then((json) => {
       console.log(json) //this returns an array of users, once auth is added in, change this function to go to "/users/me"

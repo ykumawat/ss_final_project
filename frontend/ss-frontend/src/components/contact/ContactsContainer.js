@@ -16,9 +16,15 @@ class ContactsContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      contacts: this.props.contactList
-    })
+    this.props.load()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    nextProps.load()
+    console.log(nextProps);
+    if (this.state.loggedIn) {
+      this.props.loadUserContacts()
+    }
   }
 
   render() {
@@ -33,7 +39,8 @@ class ContactsContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    contactList: state.contacts.list
+    contactList: state.contacts.list,
+    loggedIn: state.user.userInfo.isLoggedin
   }
 }
 
