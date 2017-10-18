@@ -5,9 +5,10 @@ function fetchingInfoImageToText(urlString) {
   }
 }
 
-function dataRetrieved() {
+function contactDataRetrieved(contactData) {
   return {
-    type: "DATA_RETRIEVED"
+    type: "CONTACT_DATA_RETRIEVED",
+    payload: contactData
   }
 }
 
@@ -45,17 +46,19 @@ export function fetchImageInfo(url) {
       .then((res) => res.json())
       .then((json) => {
         console.log(json.responses[0].fullTextAnnotation.text)
-        dispatch(textProcessing(json.responses[0].fullTextAnnotation.text))
+        dispatch(textProcessingNatLang(json.responses[0].fullTextAnnotation.text))
+        dispatch(textProcessingTextRazor(json.responses[0].fullTextAnnotation.text))
+        dispatch(textProcessingWatson(json.responses[0].fullTextAnnotation.text))
       })
   }
 }
 
-export function textProcessing(text) {
-  let textString = text.toString()
+export function textProcessingNatLang(text) {
+  // let textString = text.toString()
   const body = JSON.stringify({"document": {
     "type": "PLAIN_TEXT",
     "language": "en", //change this later to get input from user about language
-    "content": textString
+    "content": text
     },
     "encodingType": "UTF8"
   })
@@ -69,6 +72,68 @@ export function textProcessing(text) {
       }
     })
     .then((res) => res.json())
-    .then((data) => console.log("this is from nat lang processing api",data))
+    .then((data) => dispatch(contactDataRetrieved(data)))
+  }
+}
+
+export function textProcessingTextRazor(text) {
+  console.log("this function is hit 2nd?")
+
+  var details = {
+    "text": text,
+    "extractors": "entities"
+  }
+
+  var formBody = []
+  for (var property in details) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue)
+  }
+  formBody = formBody.join("&")
+
+  return function(dispatch) {
+    fetch("https://api.textrazor.com", {
+      method: 'POST',
+      body: formBody,
+      headers: {
+        "X-TextRazor-Key": process.env.REACT_APP_TEXTRAZOR_KEY,
+        "Accept-encoding": "application/gzip",
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }).then((res) => res.json())
+    .then((data) => console.log("this is from TEXT RAZOR", data))
+  }
+}
+
+export function textProcessingWatson(text) {
+  console.log("this function is hit 3rd?")
+
+  const body = JSON.stringify({
+    "text": text,
+    "features": {
+      "entities": {
+        "emotion": true,
+        "sentiment": true,
+        "limit": 2
+      },
+      "keywords": {
+        "emotion": true,
+        "sentiment": true,
+        "limit": 2
+      }
+    }
+  })
+
+  return function(dispatch) {
+    fetch('https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2017-02-27', {
+      method: 'POST',
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Basic" + process.env.REACT_APP_WATSON_KEY
+      }
+    }).then((res) => res.json())
+    .then((data) => console.log(data))
   }
 }

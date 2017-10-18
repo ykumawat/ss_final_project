@@ -9,13 +9,6 @@ import { Grid, List, Loader, Modal, Button} from 'semantic-ui-react'
 
 class ContactsContainer extends React.Component {
 
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     contacts: []
-  //   }
-  // }
-
   componentDidMount() {
     this.props.loadUserContacts()
   }
