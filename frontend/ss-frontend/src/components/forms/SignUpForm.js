@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import ToggleDisplay from 'react-toggle-display'
-import * as UserActions from '../actions/user'
+import * as UserActions from '../../actions/user'
+import LoginForm from './LoginForm'
 
 class SignUpForm extends React.Component {
 
@@ -54,14 +55,14 @@ class SignUpForm extends React.Component {
           <div className="six wide field">
             <input type="password" value={this.state.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
           </div>
-          <div className="radio">
-            <h4>Already a user?
-              <a href="/login">Log In Here</a>
-            </h4>
-          </div>
             <input type="submit"/>
           </div>
           </form>
+          <div >
+            <h4>Already a user?
+              <Link to="/login" component={SignUpForm}> Log In Here</Link>
+            </h4>
+          </div>
         </div>
       )
     }

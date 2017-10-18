@@ -15,10 +15,11 @@ class AddNewImageForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    if (this.props.fetchImageInfo(this.state.url) !== undefined) {
-      debugger
-        this.props.textProcessing(text) // FIX THIS. IT IS ASYNC
-    }
+    this.props.fetchImageInfo(this.state.url)
+    // if (this.props.fetchImageInfo(this.state.url) !== undefined) {
+    //   debugger
+    //     this.props.textProcessing(text) // FIX THIS. IT IS ASYNC
+    // }
   }
 
   handleInputSubmit = (event) => {

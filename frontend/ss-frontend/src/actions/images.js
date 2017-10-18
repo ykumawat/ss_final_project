@@ -44,7 +44,8 @@ export function fetchImageInfo(url) {
     })
       .then((res) => res.json())
       .then((json) => {
-        dispatch(exportingForProcessing(json.responses[0].fullTextAnnotation.text))
+        console.log(json.responses[0].fullTextAnnotation.text)
+        dispatch(textProcessing(json.responses[0].fullTextAnnotation.text))
       })
   }
 }

@@ -11,7 +11,7 @@ class Nav extends React.Component {
     if (localStorage.getItem('jwtToken')) {
       return(
         <div className="ui secondary menu">
-          <NavLink activeClassName="active" className="item" to="/">Homepage</NavLink>
+          <NavLink activeClassName="active" className="right item" to="/explore">Explore</NavLink>
           <NavLink activeClassName="active" className="item" to="/me">My Profile</NavLink>
           <NavLink activeClassName="active" className="item" to="/contacts">Contacts</NavLink>
           <NavLink activeClassName="active" className="item" to="/slides">Slides</NavLink>
@@ -22,13 +22,8 @@ class Nav extends React.Component {
     } else {
       return (
         <div className="ui secondary menu">
-          <NavLink activeClassName="active" className="item" to="/">Homepage</NavLink>
-          <NavLink activeClassName="active" className="item" to="/me">My Profile</NavLink>
-          <NavLink activeClassName="active" className="item" to="/contacts">Contacts</NavLink>
-          <NavLink activeClassName="active" className="item" to="/slides">Slides</NavLink>
-          <NavLink activeClassName="active" className="item" to="/misc">Misc</NavLink>
-          <NavLink activeClassName="active" className="right item" to="/login">Log In</NavLink>
-          <NavLink activeClassName="active" className="right item" to="/signup">Sign Up</NavLink>
+          <NavLink activeClassName="active" className="left item" to="/">Home</NavLink>
+          <NavLink activeClassName="active" className="right item" to="/explore">Explore</NavLink>
         </div>
       )
     }
