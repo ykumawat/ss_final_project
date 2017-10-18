@@ -1,5 +1,5 @@
 import React from 'react'
-import * as ContactActions from '../../actions/contacts'
+import * as ImageActions from '../../actions/images'
 import { Route, Link, withRouter } from 'react-router-dom'
 import ToggleDisplay from 'react-toggle-display'
 import { connect } from 'react-redux'
@@ -15,8 +15,10 @@ class AddNewImageForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    let urlInput = this.state.url
-    this.props.fetchImageInfo(urlInput)
+    if (this.props.fetchImageInfo(this.state.url) !== undefined) {
+      debugger
+        this.props.textProcessing(text) // FIX THIS. IT IS ASYNC
+    }
   }
 
   handleInputSubmit = (event) => {
@@ -25,23 +27,9 @@ class AddNewImageForm extends React.Component {
     })
   }
 
-  showAddContactForm = () => {
+  showAddContactForm = (event) => {
     this.setState({
       showForm: !this.state.showForm
-    })
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    let urlInput = this.state.addContact.url
-    this.props.fetchImageInfo(urlInput)
-  }
-
-  handleInputSubmit = (event) => {
-    this.setState({
-      addContact: {
-        url: event.target.value
-      }
     })
   }
 
@@ -75,7 +63,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ContactActions, dispatch)
+  return bindActionCreators(ImageActions, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddNewImageForm))

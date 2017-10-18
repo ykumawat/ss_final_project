@@ -5,7 +5,7 @@ import * as ContactActions from '../../actions/contacts'
 import ContactsList from './ContactsList'
 import { Route, Link, withRouter } from 'react-router-dom'
 import AddNewImageForm from '../forms/AddNewImageForm'
-import { Grid, List, Loader} from 'semantic-ui-react'
+import { Grid, List, Loader, Modal, Button} from 'semantic-ui-react'
 
 class ContactsContainer extends React.Component {
 
@@ -23,7 +23,7 @@ class ContactsContainer extends React.Component {
   render() {
     return(
       <div>
-        <div style={{textAlign:"right"}}>
+        <div>
           <AddNewImageForm />
         </div>
            <Route exact path="/contacts" render={(props) => <ContactsList contacts={this.props.contactList} {...props} />}/>
