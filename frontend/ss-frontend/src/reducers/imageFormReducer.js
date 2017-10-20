@@ -1,15 +1,13 @@
-function imageFormReducer(state = {isFetching: false, contactData: "", url: "", name: "", company: "", email: "", phone: "", notes: "", image: ""}, action) {
+function imageFormReducer(state = {isFetching: false, contactData: "", url: undefined, name: "", organization: "", email: "", phone: "", notes: ""}, action) {
   switch(action.type) {
     case "SUBMIT_FORM":
-      return Object.assign({}, state, {url: action.payload.url, name: action.payload.name, company: action.payload.company, email: action.payload.email, phone: action.payload.phone, notes: action.payload.notes, image: action.payload.image})
+      return Object.assign({}, state, {url: action.payload.url, name: action.payload.name, organization: action.payload.organization, email: action.payload.email, phone: action.payload.phone, notes: action.payload.notes, image: action.payload.image})
     case "FETCHING_INFO":
       return Object.assign({}, state, {url: action.payload, isFetching: true})
     case "CONTACT_DATA_RETRIEVED":
       return Object.assign({}, state, {contactData: action.payload})
-    case "EXPORTING_TEXT_FOR_PROCESSING":
-      return Object.assign({}, state, {isFetching: true, text: action.payload})
-    // case "EXPORTING_TEXT_TO_USER":
-    //   return Object.assign({}, state, )
+    case "EXPORTING_TEXT_FOR_RENDERING":
+      return Object.assign({}, state, {name: action.payload.name, organization: action.payload.organization, email: action.payload.email, phone: action.payload.phone})
     default:
       return state
   }

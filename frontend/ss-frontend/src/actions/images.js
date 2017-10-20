@@ -1,4 +1,4 @@
-function fetchingInfoImageToText(urlString) {
+export function fetchingInfoImageToText(urlString) {
   return {
     type: "FETCHING_INFO",
     payload: urlString
@@ -12,10 +12,10 @@ function contactDataRetrieved(contactData) {
   }
 }
 
-function exportingForProcessing(text) {
+function exportingForRendering(obj) {
   return {
-    type: "EXPORTING_TEXT_FOR_PROCESSING",
-    payload: text
+    type: "EXPORTING_TEXT_FOR_RENDERING",
+    payload: obj
   }
 }
 
@@ -34,7 +34,7 @@ export function fetchImageInfo(url) {
     ]
   })
   return function(dispatch) {
-    dispatch(fetchingInfoImageToText(urlString))
+    // dispatch(fetchingInfoImageToText(urlString))
     fetch(`https://vision.googleapis.com/v1/images:annotate?key=`+ process.env.REACT_APP_CLOUDVISION_KEY, {
       method: 'POST',
       body: body,
@@ -47,9 +47,10 @@ export function fetchImageInfo(url) {
       .then((json) => {
         console.log(json.responses[0].fullTextAnnotation.text)
         dispatch(textProcessingNatLang(json.responses[0].fullTextAnnotation.text))
-        dispatch(textProcessingTextRazor(json.responses[0].fullTextAnnotation.text))
-        dispatch(textProcessingWatson(json.responses[0].fullTextAnnotation.text))
+        // dispatch(textProcessingTextRazor(json.responses[0].fullTextAnnotation.text))
+        // dispatch(textProcessingWatson(json.responses[0].fullTextAnnotation.text))
       })
+      .catch(e => console.log(e))
   }
 }
 

@@ -9,23 +9,50 @@ class AddNewImageForm extends React.Component {
   constructor() {
     super()
     this.state = {
-      showForm: false
+      showForm: false,
+      organization: [],
+      person: [],
+      location: [],
+      other: []
     }
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.fetchImageInfo(this.state.url)
-    // if (this.props.fetchImageInfo(this.state.url) !== undefined) {
-    //   debugger
-    //     this.props.textProcessing(text) // FIX THIS. IT IS ASYNC
-    // }
+    console.log(this.props.url);
+    this.props.fetchImageInfo(this.props.url)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.contactData !== "") {
+      this.renderModalForm(nextProps.contactData.entities)
+    }
+  }
+
+  renderModalForm = (data) => {
+    data.map((entity) => {
+      if (entity.type === "ORGANIZATION") {
+        this.setState({
+          organization: this.state.organization.concat(entity)
+        })
+      } else if (entity.type === "PERSON" && entity.name.split(" ").length > 1) {
+        this.setState({
+          person: this.state.person.concat(entity)
+        })
+      } else if (entity.type === "LOCATION") {
+        this.setState({
+          location: this.state.location.concat(entity)
+        })
+      } else {
+        this.setState({
+          other: this.state.other.concat(entity)
+        })
+      }
+    })
   }
 
   handleInputSubmit = (event) => {
-    this.setState({
-      url: event.target.value
-    })
+    this.props.fetchingInfoImageToText(event.target.value)
   }
 
   showAddContactForm = (event) => {
@@ -41,7 +68,7 @@ class AddNewImageForm extends React.Component {
         <ToggleDisplay show={this.state.showForm}>
           <div>
             <form onSubmit={this.handleSubmit}>
-              <input type="text" onChange={this.handleInputSubmit} value={this.state.url} placeholder="Enter your image URL"/>
+              <input type="text" onChange={this.handleInputSubmit} value={this.props.url} placeholder="Enter your image URL"/>
               <input type="submit" value="submit"/>
             </form>
           </div>
@@ -55,11 +82,11 @@ function mapStateToProps(state) {
   return {
     url: state.imageForm.url,
     name: state.imageForm.name,
-    company: state.imageForm.company,
+    organization: state.imageForm.organization,
     email: state.imageForm.email,
     phone: state.imageForm.phone,
     notes: state.imageForm.notes,
-    image: state.imageForm.image
+    contactData: state.imageForm.contactData
   }
 }
 
