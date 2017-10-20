@@ -1,6 +1,7 @@
 import React from 'react'
 import * as ImageActions from '../../actions/images'
 import { Route, Link, withRouter } from 'react-router-dom'
+import { Card, Button, Icon, Image, Modal } from 'semantic-ui-react'
 import ToggleDisplay from 'react-toggle-display'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -19,36 +20,39 @@ class AddNewImageForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.props.url);
     this.props.fetchImageInfo(this.props.url)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.contactData !== "") {
-      this.renderModalForm(nextProps.contactData.entities)
+      this.categorizeData(nextProps.contactData.entities)
     }
   }
 
-  renderModalForm = (data) => {
+  categorizeData = (data) => {
+    let orgs = []
+    let person = []
+    let locations = []
+    let other = []
     data.map((entity) => {
       if (entity.type === "ORGANIZATION") {
-        this.setState({
-          organization: this.state.organization.concat(entity)
-        })
+        orgs.concat(entity)
       } else if (entity.type === "PERSON" && entity.name.split(" ").length > 1) {
-        this.setState({
-          person: this.state.person.concat(entity)
-        })
+        person.concat(entity)
       } else if (entity.type === "LOCATION") {
-        this.setState({
-          location: this.state.location.concat(entity)
-        })
+        locations.concat(entity)
       } else {
-        this.setState({
-          other: this.state.other.concat(entity)
-        })
+        other.concat(entity)
       }
     })
+    this.props.addOrganization(orgs)
+    this.props.addPerson(person)
+    this.props.addLocation(locations)
+    this.props.addNotes(other)
+  }
+
+  renderModalForm() {
+
   }
 
   handleInputSubmit = (event) => {
@@ -64,15 +68,10 @@ class AddNewImageForm extends React.Component {
   render() {
     return(
       <div>
-        <button onClick={this.showAddContactForm}>+</button>
-        <ToggleDisplay show={this.state.showForm}>
-          <div>
-            <form onSubmit={this.handleSubmit}>
-              <input type="text" onChange={this.handleInputSubmit} value={this.props.url} placeholder="Enter your image URL"/>
-              <input type="submit" value="submit"/>
-            </form>
-          </div>
-        </ToggleDisplay>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" onChange={this.handleInputSubmit} value={this.props.url} placeholder="Enter your image URL"/>
+          <input type="submit" value="submit"/>
+        </form>
       </div>
     )
   }

@@ -5,6 +5,48 @@ export function fetchingInfoImageToText(urlString) {
   }
 }
 
+export function addOrganization(organization) {
+  return {
+    type: "ADD_ORGANIZATION",
+    payload: organization
+  }
+}
+
+export function addPerson(person) {
+  return {
+    type: "ADD_PERSON",
+    payload: person
+  }
+}
+
+export function addLocation(location) {
+  return {
+    type: "ADD_LOCATION",
+    payload: location
+  }
+}
+
+export function addPhone(phone) {
+  return {
+    type: "ADD_PHONE",
+    payload: phone
+  }
+}
+
+export function addEmail(email) {
+  return {
+    type: "ADD_EMAIL",
+    payload: email
+  }
+}
+
+export function addNotes(notes) {
+  return {
+    type: "ADD_NOTES",
+    payload: notes
+  }
+}
+
 function contactDataRetrieved(contactData) {
   return {
     type: "CONTACT_DATA_RETRIEVED",
