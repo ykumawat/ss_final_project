@@ -2,7 +2,6 @@ import React from 'react'
 import * as ImageActions from '../../actions/images'
 import { Route, Link, withRouter } from 'react-router-dom'
 import { Card, Button, Icon, Image, Modal } from 'semantic-ui-react'
-import ToggleDisplay from 'react-toggle-display'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -21,28 +20,17 @@ class AddNewImageForm extends React.Component {
     this.props.changeURL()
   }
 
-  handleNameChange = (event) => {
-    event.preventDefault()
-    console.log(event.target.value)
-  }
-
-  handleOrgChange = (event) => {
-    event.preventDefault()
-    console.log("something");
-  }
-
-  handleLocChange = (event) => {
-    event.preventDefault()
-    console.log("something");
-  }
-
-  handleNoteChange = (event) => {
-    event.preventDefault()
-    console.log("something");
-  }
-
   handleNewContact = (event) => {
+    event.preventDefault()
     this.props.addContactToUser()
+  }
+
+  addField = (event) => {
+    return(
+      <div>
+        <input type="text"></input>
+      </div>
+    )
   }
 
   render() {
@@ -58,25 +46,25 @@ class AddNewImageForm extends React.Component {
     } else {
         const nameInputs = this.props.name.map(n => {
           return (
-            <input type="text" value={n.name} onChange={this.handleNameChange}/>
+            <input type="text" value={n.name}/>
           )
         })
 
         const orgInputs = this.props.organization.map(org => {
           return (
-            <input type="text" value={org.name} onChange={this.handleOrgChange}/>
+            <input type="text" value={org.name}/>
           )
         })
 
         const locInputs = this.props.location.map(loc => {
           return (
-            <input type="text" value={loc.name} onChange={this.handleLocChange}/>
+            <input type="text" value={loc.name}/>
           )
         })
 
         const noteInputs = this.props.notes.map(note => {
           return (
-            <input type="text" value={note.name} onChange={this.handleNoteChange}/>
+            <input type="text" value={note.name}/>
           )
         })
 
