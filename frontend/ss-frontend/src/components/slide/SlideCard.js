@@ -4,6 +4,18 @@ import { Link } from 'react-router-dom'
 
 class SlideCard extends React.Component {
 
+  editSlide() {
+
+  }
+
+  shareSlide() {
+
+  }
+
+  deleteSlide() {
+    
+  }
+
   render() {
     const {slide} = this.props
     return (
@@ -20,7 +32,14 @@ class SlideCard extends React.Component {
             </Card.Header>
           </Card.Content>
           <Modal trigger={<Button>Show Info</Button>}>
-            <Modal.Header>{slide.topic}</Modal.Header>
+            <Modal.Header>
+              {slide.topic}
+              <div align='right'>
+                <Button icon color='teal' onClick={this.editSlide}><Icon name='edit'/></Button>
+                <Button icon color='yellow' onClick={this.shareSlide}><Icon name='share'/></Button>
+                <Button icon color='red' onClick={this.deleteSlide}><Icon name='delete'/></Button>
+              </div>
+            </Modal.Header>
             <Modal.Content image>
               <Image wrapped size='medium' src={slide.url}/>
               <Modal.Description>

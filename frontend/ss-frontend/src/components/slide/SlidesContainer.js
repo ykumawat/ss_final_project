@@ -16,7 +16,8 @@ class SlidesContainer extends React.Component {
   render() {
     return(
       <div>
-        <div>
+        <h2 align="center">Your Slides</h2>
+        <div align="right">
           <Modal trigger={<Button>(+)</Button>}>
             <Modal.Content>
               <AddNewImageForm />

@@ -21,7 +21,19 @@ class AddNewImageForm extends React.Component {
   }
 
   handleChangeName = (event) => {
-    console.log("why doesnt this work");
+    console.log(event.target.value);
+  }
+
+  handleChangeOrg = (event) => {
+    console.log(event.target.value);
+  }
+
+  handleChangeLoc = (event) => {
+    console.log(event.target.value);
+  }
+
+  handleChangeNote = (event) => {
+    console.log(event.target.value);
   }
 
   handleNewContact = (event) => {
@@ -29,13 +41,17 @@ class AddNewImageForm extends React.Component {
     this.props.addContactToUser()
   }
 
-  addField = (event) => {
-    return(
-      <div>
-        <input type="text"></input>
-      </div>
-    )
-  }
+  // removeField() {
+  //   console.log("gotta fix this");
+  // }
+
+  // addField = (event) => {
+  //   return(
+  //     <div>
+  //       <input type="text"></input>
+  //     </div>
+  //   )
+  // }
 
   render() {
     if (this.props.isRendering === false) {
@@ -50,25 +66,34 @@ class AddNewImageForm extends React.Component {
     } else {
         const nameInputs = this.props.name.map(n => {
           return (
-            <input type="text" value={n.name} />
+            <div>
+              <input type="text" defaultValue={n.name} onChange={this.handleChangeName} width="180" height="25"/>
+              <Button onClick={this.removeField}>X</Button>
+            </div>
           )
         })
 
         const orgInputs = this.props.organization.map(org => {
           return (
-            <input type="text" value={org.name}/>
+            <div>
+              <input type="text" defaultValue={org.name} onChange={this.handleChangeOrg} width="180" height="25"/>
+            </div>
           )
         })
 
         const locInputs = this.props.location.map(loc => {
           return (
-            <input type="text" value={loc.name}/>
+            <div>
+              <input type="text" defaultValue={loc.name} onChange={this.handleChangeLoc} width="180" height="25"/>
+            </div>
           )
         })
 
         const noteInputs = this.props.notes.map(note => {
           return (
-            <input type="text" value={note.name}/>
+            <div>
+              <input type="text" defaultValue={note.name} onChange={this.handleChangeNote} width="180" height="25"/>
+            </div>
           )
         })
 
@@ -91,7 +116,8 @@ class AddNewImageForm extends React.Component {
             <div>
               Notes: {noteInputs}
             </div>
-            <Button type="submit">Save Contact</Button>
+              <Button onClick={this.addField}>+</Button>
+              <Button type="submit">Save Contact</Button>
           </form>
         </div>
       )

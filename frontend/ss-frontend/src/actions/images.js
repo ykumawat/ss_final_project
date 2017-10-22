@@ -17,8 +17,9 @@ export function changeURL() {
   }
 }
 
-export function addContactToUser(name) {
-
+export function addContactToUser() {
+//not sure yet how to work this in
+//makes fetch request to add contact
 }
 
 export function addOrganization(organization) {

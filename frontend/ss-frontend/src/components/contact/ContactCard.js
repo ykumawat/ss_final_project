@@ -5,7 +5,19 @@ import { Link } from 'react-router-dom'
 class ContactCard extends React.Component {
 
   editContact() {
-    
+
+  }
+
+  emailContact() {
+
+  }
+
+  shareContact() {
+
+  }
+
+  deleteContact() {
+
   }
 
   render() {
@@ -24,17 +36,24 @@ class ContactCard extends React.Component {
             </Card.Header>
           </Card.Content>
           <Modal trigger={<Button>Show Info</Button>}>
-            <Modal.Header>{contact.name}</Modal.Header>
+            <Modal.Header>
+              {contact.name}
+              <div align='right'>
+                <Button icon color='teal' onClick={this.editContact}><Icon name='edit'/></Button>
+                <Button icon color='green' onClick={this.emailContact}><Icon name='mail outline'/></Button>
+                <Button icon color='yellow' onClick={this.shareContact}><Icon name='share'/></Button>
+                <Button icon color='red' onClick={this.deleteContact}><Icon name='delete'/></Button>
+              </div>
+            </Modal.Header>
             <Modal.Content image>
               <Image wrapped size='medium' src={contact.url}/>
               <Modal.Description>
-                <br/>
                 <h3>Company: {contact.company}</h3>
                 <p>Phone: {contact.phone}</p>
                 <p>Email: {contact.email}</p>
                 <p>Notes: {contact.notes}</p>
+
               </Modal.Description>
-              <Button onClick={this.editContact}>Edit Contact</Button>
             </Modal.Content>
           </Modal>
         </Card>
