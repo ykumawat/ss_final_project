@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 
 class ContactCard extends React.Component {
 
+  editContact() {
+    
+  }
+
   render() {
     const {contact} = this.props
     return (
@@ -30,6 +34,7 @@ class ContactCard extends React.Component {
                 <p>Email: {contact.email}</p>
                 <p>Notes: {contact.notes}</p>
               </Modal.Description>
+              <Button onClick={this.editContact}>Edit Contact</Button>
             </Modal.Content>
           </Modal>
         </Card>

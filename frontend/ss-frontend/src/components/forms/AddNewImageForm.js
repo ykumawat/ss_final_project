@@ -20,6 +20,10 @@ class AddNewImageForm extends React.Component {
     this.props.changeURL()
   }
 
+  handleChangeName = (event) => {
+    console.log("why doesnt this work");
+  }
+
   handleNewContact = (event) => {
     event.preventDefault()
     this.props.addContactToUser()
@@ -46,7 +50,7 @@ class AddNewImageForm extends React.Component {
     } else {
         const nameInputs = this.props.name.map(n => {
           return (
-            <input type="text" value={n.name}/>
+            <input type="text" value={n.name} />
           )
         })
 

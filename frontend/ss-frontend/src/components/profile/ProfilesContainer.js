@@ -5,15 +5,25 @@ import ToggleDisplay from 'react-toggle-display'
 import { Route, Link, withRouter } from 'react-router-dom'
 import AddNewImageForm from '../forms/AddNewImageForm'
 import UserActions from '../../actions/user'
+import { Grid, List, Loader, Modal, Button} from 'semantic-ui-react'
 
 class ProfilesContainer extends React.Component {
-
-
 
   render() {
     return (
       <div>
-        <AddNewImageForm/>
+        <h2>Welcome, {this.props.user}!</h2>
+        <div>
+          <h3>Networking events in your zipcode for the next 5 days:</h3>
+        </div>
+        <Modal trigger={<Button>(+)</Button>}>
+          <Modal.Content>
+            <AddNewImageForm />
+          </Modal.Content>
+        </Modal>
+        <div>
+
+        </div>
       </div>
     )
   }
@@ -22,6 +32,7 @@ class ProfilesContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user.userInfo.user.name,
     contacts: state.contacts.list,
     slides: state.slides.list
   }

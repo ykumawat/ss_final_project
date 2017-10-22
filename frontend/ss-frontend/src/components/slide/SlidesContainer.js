@@ -17,9 +17,13 @@ class SlidesContainer extends React.Component {
     return(
       <div>
         <div>
-          <AddNewImageForm />
+          <Modal trigger={<Button>(+)</Button>}>
+            <Modal.Content>
+              <AddNewImageForm />
+            </Modal.Content>
+          </Modal>
         </div>
-           <Route exact path="/contacts" render={(props) => <SlidesList slides={this.props.slideList} {...props} />}/>
+           <Route exact path="/slides" render={(props) => <SlidesList slides={this.props.slideList} {...props} />}/>
       </div>
     )
   }

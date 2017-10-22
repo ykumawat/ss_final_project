@@ -10,21 +10,23 @@ class SlideCard extends React.Component {
       <div>
         <Card>
           <Card.Content>
-            <Image wrapped size='medium' src=''/>
+            <Image wrapped size='medium' src={slide.url}/>
             <Card.Header>
               <br/>
-              example
+              {slide.topic}
               <br/>
-              example
+              {slide.text}
               <br/>
             </Card.Header>
           </Card.Content>
           <Modal trigger={<Button>Show Info</Button>}>
-            <Modal.Header>example</Modal.Header>
+            <Modal.Header>{slide.topic}</Modal.Header>
             <Modal.Content image>
-              <Image wrapped size='medium' src=''/>
+              <Image wrapped size='medium' src={slide.url}/>
               <Modal.Description>
                 <br/>
+                <p>Topic: {slide.topic}</p>
+                <p>Text: {slide.text}</p>
               </Modal.Description>
             </Modal.Content>
           </Modal>

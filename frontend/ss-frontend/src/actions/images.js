@@ -18,9 +18,7 @@ export function changeURL() {
 }
 
 export function addContactToUser(name) {
-  return {
-    null
-  }
+
 }
 
 export function addOrganization(organization) {
