@@ -5,6 +5,24 @@ export function fetchingInfoImageToText(urlString) {
   }
 }
 
+function renderToUser() {
+  return {
+    type: "RENDERING_TO_USER_FOR_EDITING"
+  }
+}
+
+export function changeURL() {
+  return {
+    type: "CHANGING_URL"
+  }
+}
+
+export function addContactToUser() {
+  return (
+    null
+  )
+}
+
 export function addOrganization(organization) {
   return {
     type: "ADD_ORGANIZATION",
@@ -47,12 +65,6 @@ export function addNotes(notes) {
   }
 }
 
-function contactDataRetrieved(contactData) {
-  return {
-    type: "CONTACT_DATA_RETRIEVED",
-    payload: contactData
-  }
-}
 
 function exportingForRendering(obj) {
   return {
@@ -115,9 +127,35 @@ export function textProcessingNatLang(text) {
       }
     })
     .then((res) => res.json())
-    .then((data) => dispatch(contactDataRetrieved(data)))
+    .then((data) => dispatch(categorizeData(data.entities)))
   }
 }
+
+function categorizeData(contactData) {
+  let orgs = []
+  let person = []
+  let locations = []
+  let other = []
+  contactData.map((entity) => {
+    if (entity.type === "ORGANIZATION") {
+      orgs.push(entity)
+    } else if (entity.type === "PERSON" && entity.name.split(" ").length > 1) {
+      person.push(entity)
+    } else if (entity.type === "LOCATION") {
+      locations.push(entity)
+    } else {
+      other.push(entity)
+    }
+  })
+  return function(dispatch) {
+    dispatch(addOrganization(orgs))
+    dispatch(addPerson(person))
+    dispatch(addLocation(locations))
+    dispatch(addNotes(other))
+    dispatch(renderToUser())
+  }
+}
+
 
 export function textProcessingTextRazor(text) {
   console.log("this function is hit 2nd?")
