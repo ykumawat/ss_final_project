@@ -23,7 +23,7 @@ export function loginUser(email, password) {
   const body = JSON.stringify({email: email, password: password})
   return function(dispatch) {
     fetch("http://localhost:3000/login", {
-      method: 'post',
+      method: 'POST',
       body: body,
       headers: {
         "Accept": "application/json",
@@ -43,22 +43,26 @@ export function loginUser(email, password) {
 
 }
 
-export function signupUser(loginParams) {
-  const body = JSON.stringify(loginParams)
+export function signupUser(email, password, image, name) {
+  const body = JSON.stringify({email: email, password: password, image: image, name: name})
   return function(dispatch) {
     fetch("http://localhost:3000/api/v1/users", {
-      method: 'post',
+      method: 'POST',
       body: body,
       headers: {
         "Accept": "application/json",
         "Content-Type":"application/json"
       }
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+      })
       .then((user) => {
         localStorage.setItem("jwtToken", user.jwt)
-        dispatch(signupUser(user.user))
-      })
+        dispatch(signupUser(user))
+      }).catch((error) => console.log("SIGN UP FAILED", error))
   }
 
 }

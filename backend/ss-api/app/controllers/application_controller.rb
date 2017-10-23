@@ -14,6 +14,10 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def encode_token(payload)
+    token = JWT.encode(payload, Rails.application.secrets.AUTH_SECRET.to_s)
+  end
+
   def authenticate
     if !logged_in?
       render json: {error: "unauthorized"}, status: 401
