@@ -17,7 +17,7 @@ class ContactsContainer extends React.Component {
     return(
       <div>
         <h2 align="center">Your Contacts</h2>
-        <div align="right" >
+        <div align="right">
           <Modal trigger={<Button>(+)</Button>}>
             <Modal.Content>
               <AddNewImageForm />

@@ -20,6 +20,26 @@ class ContactCard extends React.Component {
 
   }
 
+  makeContactPublic() {
+    return (
+      <div>
+        <Modal>
+
+        </Modal>
+      </div>
+    )
+  }
+
+  makeContactPrivate() {
+    return (
+      <div>
+        <Modal>
+
+        </Modal>
+      </div>
+    )
+  }
+
   render() {
     const {contact} = this.props
     return (
@@ -52,7 +72,8 @@ class ContactCard extends React.Component {
                 <p>Phone: {contact.phone}</p>
                 <p>Email: {contact.email}</p>
                 <p>Notes: {contact.notes}</p>
-
+                <p><input type="radio" value="public" onChange={this.makeContactPublic}/></p>
+                <p><input type="radio" value="private" onChange={this.makeContactPrivate}/></p>
               </Modal.Description>
             </Modal.Content>
           </Modal>

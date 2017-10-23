@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import ToggleDisplay from 'react-toggle-display'
 import * as UserActions from '../../actions/user'
 import LoginForm from './LoginForm'
+import { Form, Button } from 'semantic-ui-react'
 
 class SignUpForm extends React.Component {
 
@@ -43,21 +43,15 @@ class SignUpForm extends React.Component {
 
   render(){
     if (localStorage.getItem('jwtToken')) {
-      return <Redirect to="/home"/>
+      return <Redirect to="/me"/>
     } else {
       return(
-        <div>
-          <form onSubmit={this.handleSubmit} className="ui form">
-          <div className ="center fields">
-          <div className="six wide field">
-            <input type="text" value={this.state.emailInput} onChange={this.handleEmailChange} placeholder="email" />
-          </div>
-          <div className="six wide field">
-            <input type="password" value={this.state.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
-          </div>
-            <input type="submit"/>
-          </div>
-          </form>
+        <div align="center">
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Input type="text" value={this.state.emailInput} onChange={this.handleEmailChange} placeholder="email" />
+            <Form.Input type="password" value={this.state.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
+            <Form.Button>Submit</Form.Button>
+          </Form>
           <div >
             <h4>Already a user?
               <Link to="/login" component={SignUpForm}> Log In Here</Link>

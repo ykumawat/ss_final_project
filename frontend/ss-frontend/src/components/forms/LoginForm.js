@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import ToggleDisplay from 'react-toggle-display'
 import * as UserActions from '../../actions/user'
 import SignUpForm from './SignUpForm'
+import { Form, Button } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
 
@@ -40,19 +40,13 @@ class LoginForm extends React.Component {
       return <Redirect to="/me"/>
     } else {
       return(
-        <div>
-          <form onSubmit={this.handleSubmit} className="ui form">
-          <div className ="center fields">
-          <div className="four wide field">
-            <input type="text" value={this.state.email} onChange={this.handleEmailChange} placeholder="email" />
-          </div>
-          <div className="four wide field">
-            <input type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="password"/>
-          </div>
-            <input type="submit"/>
-          </div>
-          </form>
-          <div >
+        <div align="center">
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Input type="text" value={this.state.email} onChange={this.handleEmailChange} placeholder="email" />
+            <Form.Input type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="password"/>
+            <Form.Button>Submit</Form.Button>
+        </Form>
+          <div>
             <h4>No Account Yet?
               <Link to="/signup" component={SignUpForm}> Sign Up Here</Link>
             </h4>

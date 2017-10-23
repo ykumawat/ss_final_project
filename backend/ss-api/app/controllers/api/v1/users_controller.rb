@@ -19,6 +19,9 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def friends
+    @user = User.find(params[:id])
+  end
 
   def edit
     user = User.find(params[:id])
@@ -38,7 +41,8 @@ class Api::V1::UsersController < ApplicationController
     if @current_user
       contacts = @current_user.contacts
       slides = @current_user.slides
-      render json: {user: @current_user, contacts: contacts, slides: slides}, status: 201
+      friends = @current_user.friends
+      render json: {user: @current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
     else
       render json: {message: "Error"}
     end
