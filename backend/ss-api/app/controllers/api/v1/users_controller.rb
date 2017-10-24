@@ -29,7 +29,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     if @current_user
-      # something
+      byebug
     end
   end
 

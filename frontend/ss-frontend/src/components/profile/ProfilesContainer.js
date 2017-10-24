@@ -12,15 +12,19 @@ class ProfilesContainer extends React.Component {
   render() {
     return (
       <div>
-        <h2>Welcome, {this.props.user}!</h2>
-        <div>
-          <h3>Networking events in your zipcode for the next 5 days:</h3>
+        <div align="center">
+          <h2>Welcome, {this.props.user.name}!</h2>
         </div>
-        <Modal trigger={<Button>(+)</Button>}>
-          <Modal.Content>
-            <AddNewImageForm />
-          </Modal.Content>
-        </Modal>
+        <div align="right">
+          <Modal trigger={<Button>(+)</Button>}>
+            <Modal.Content>
+              <AddNewImageForm />
+            </Modal.Content>
+          </Modal>
+        </div>
+        <div>
+          <h3>Networking events in {this.props.user.zipcode} for the next 5 days:</h3>
+        </div>
         <div>
 
         </div>
@@ -32,7 +36,7 @@ class ProfilesContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user.userInfo.user.name,
+    user: state.user.userInfo.user,
     contacts: state.contacts.list,
     slides: state.slides.list
   }

@@ -37,6 +37,7 @@ export function loginUser(email, password) {
       })
       .then((user) => {
         localStorage.setItem("jwtToken", user.jwt)
+        localStorage.setItem("userId", user.user.id)
         dispatch(loginSuccess(user))
       }).catch((error) => console.log("LOGIN FAILED", error))
   }
@@ -70,6 +71,7 @@ export function signupUser(email, password, image, name) {
 export function logoutUser(user){
   return function(dispatch) {
     localStorage.removeItem("jwtToken")
+    localStorage.removeItem("userId")
     dispatch(signOutUser())
   }
 }
