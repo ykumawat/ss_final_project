@@ -5,7 +5,7 @@ import ToggleDisplay from 'react-toggle-display'
 import { Route, Link, withRouter } from 'react-router-dom'
 import AddNewImageForm from '../forms/AddNewImageForm'
 import UserActions from '../../actions/user'
-import { Grid, List, Loader, Modal, Button} from 'semantic-ui-react'
+import { Grid, List, Loader, Modal, Button, Image} from 'semantic-ui-react'
 import LinkedInContainer from './LinkedInContainer'
 import NewsFeed from './NewsFeedContainer'
 import MeetUp from './MeetUp'
@@ -18,6 +18,7 @@ class ProfilesContainer extends React.Component {
       <div>
         <div align="center">
           <h2>Welcome, {this.props.user.name}!</h2>
+          <Image wrapped size='small' src={this.props.user.profile_image}/>
         </div>
         <div align="center">
           <LinkedInContainer/>

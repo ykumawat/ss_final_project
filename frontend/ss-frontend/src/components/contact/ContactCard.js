@@ -28,10 +28,11 @@ class ContactCard extends React.Component {
 
   }
 
-  makeContactPublic() {
-  }
-
-  makeContactPrivate() {
+  makeContactPublic = (event) => {
+    this.setState({
+      active: !this.state.active
+    })
+    this.props.shareContactOnNewsFeed(this.props.contact.id, this.props.contact.shared)
   }
 
   handleChangeName = (event) => {
@@ -70,6 +71,7 @@ class ContactCard extends React.Component {
 
   render() {
     const {contact} = this.props
+    const {active} = this.state
     return (
       <div>
         <Card>
@@ -138,8 +140,7 @@ class ContactCard extends React.Component {
                 <p>Phone: {contact.phone}</p>
                 <p>Email: {contact.email}</p>
                 <p>Notes: {contact.notes}</p>
-                <p><input type="radio" value="public" onChange={this.makeContactPublic}/></p>
-                <p><input type="radio" value="private" onChange={this.makeContactPrivate}/></p>
+                <Button toggle active={active} onClick={this.makeContactPublic}>Public</Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>

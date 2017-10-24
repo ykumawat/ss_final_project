@@ -82,3 +82,7 @@ export function deleteContact(id) {
     })
   }
 }
+
+export function shareContactOnNewsFeed(id, shared) {
+  console.log(id, shared)
+}
