@@ -1,5 +1,5 @@
 class Api::V1::SlidesController < ApplicationController
-  skip_before_action :authenticate
+  skip_before_action :authenticate, only: [:index]
 
   def index
     @slides = Slide.all
@@ -21,7 +21,7 @@ class Api::V1::SlidesController < ApplicationController
   end
 
   def destroy
-    @slide = Slide.find(params[:id])
+    @slide = Slide.find(params[:id].to_i)
     @slide.delete
     current_user = User.find(params[:user_id].to_i)
     contacts = current_user.contacts

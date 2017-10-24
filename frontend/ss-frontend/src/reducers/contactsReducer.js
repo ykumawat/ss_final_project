@@ -7,7 +7,7 @@ function contactsReducer(state = {isFetching: false, list: []}, action) {
     case "CONTACT_UPDATED":
       return Object.assign({}, state, {list: action.payload, isFetching: false})
     case "CONTACT_DELETED":
-    return Object.assign({}, state, { list: action.payload, isFetching: false})
+    return Object.assign({}, state, {list: action.payload, isFetching: false})
     default:
       return state
   }

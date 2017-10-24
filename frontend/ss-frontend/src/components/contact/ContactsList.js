@@ -4,8 +4,8 @@ import { Button, Header, Image, Modal, Grid } from 'semantic-ui-react'
 
 
 const ContactsList = (props) => {
-  const contactCards = props.contacts.map((contact, index) => {
-    return <ContactCard key={index} contact={contact}/>
+  const contactCards = props.contacts.map((contact) => {
+    return <ContactCard contact={contact}/>
   })
   return (
     <Grid>

@@ -63,7 +63,8 @@ export function editSlide(id, text, topic) {
 }
 
 export function deleteSlide(id) {
-  const body = JSON.stringify({id: id})
+  const userId = localStorage.getItem("userId")
+  const body = JSON.stringify({id: id, user_id: userId})
   return function(dispatch) {
     const jwtToken = localStorage.getItem("jwtToken")
     fetch(`http://localhost:3000/api/v1/slides/${id}`, {
@@ -76,7 +77,7 @@ export function deleteSlide(id) {
     }).then((res) => res.json())
     .then((json) => {
       const slides = json.slides
-      dispatch(deleteSlide(slides))
+      dispatch(deletedSlide(slides))
     })
   }
 }

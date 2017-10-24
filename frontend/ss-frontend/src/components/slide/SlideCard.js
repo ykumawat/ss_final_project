@@ -13,6 +13,9 @@ class SlideCard extends React.Component {
 
   editSlide = (event) => {
     event.preventDefault()
+    this.setState({
+      modalOpen: false
+    })
     this.props.editSlide(this.props.slide.id, this.state.text, this.state.topic)
   }
 

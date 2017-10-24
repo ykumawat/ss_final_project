@@ -20,7 +20,7 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def destroy
-    @contact = Contact.find(params[:id])
+    @contact = Contact.find(params[:id].to_i)
     @contact.delete
     current_user = User.find(params[:user_id].to_i)
     contacts = current_user.contacts

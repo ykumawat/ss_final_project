@@ -24,7 +24,6 @@ class SlidesContainer extends React.Component {
 
 }
 
-
 function mapStateToProps(state) {
   return {
     slideList: state.slides.list,

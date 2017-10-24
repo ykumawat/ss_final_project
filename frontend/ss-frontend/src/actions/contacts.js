@@ -63,7 +63,8 @@ export function editContact(id, name, company, email, phone, notes) {
 }
 
 export function deleteContact(id) {
-  const body = JSON.stringify({id: id})
+  const userId = localStorage.getItem("userId")
+  const body = JSON.stringify({id: id, user_id: userId})
   return function(dispatch) {
     const jwtToken = localStorage.getItem("jwtToken")
     fetch(`http://localhost:3000/api/v1/contacts/${id}`, {
@@ -75,6 +76,7 @@ export function deleteContact(id) {
       }
     }).then((res) => res.json())
     .then((json) => {
+      console.log(json)
       const contacts = json.contacts
       dispatch(deletedContact(contacts))
     })
