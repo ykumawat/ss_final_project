@@ -18,11 +18,6 @@ class ProfilesContainer extends React.Component {
       <div>
         <div align="center">
           <h2>Welcome, {this.props.user.name}!</h2>
-              <Modal trigger={<Button>(+)</Button>}>
-                <Modal.Content>
-                  <AddNewImageForm />
-                </Modal.Content>
-              </Modal>
         </div>
         <div align="center">
           <LinkedInContainer/>

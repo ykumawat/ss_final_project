@@ -17,13 +17,6 @@ class ContactsContainer extends React.Component {
     return(
       <div>
         <h2 align="center">Your Contacts</h2>
-        <div align="right">
-          <Modal trigger={<Button>(+)</Button>}>
-            <Modal.Content>
-              <AddNewImageForm />
-            </Modal.Content>
-          </Modal>
-        </div>
            <Route exact path="/contacts" render={(props) => <ContactsList contacts={this.props.contactList} {...props} />}/>
       </div>
     )

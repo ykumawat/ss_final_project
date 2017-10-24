@@ -18,9 +18,10 @@ function updatedContact(contacts) {
   }
 }
 
-function deletedContact() {
+function deletedContact(contacts) {
   return {
-    type: "CONTACT_DELETED"
+    type: "CONTACT_DELETED",
+    payload: contacts
   }
 }
 
@@ -74,8 +75,8 @@ export function deleteContact(id) {
       }
     }).then((res) => res.json())
     .then((json) => {
-      const contact = json.contact
-      dispatch(deletedContact(contact))
+      const contacts = json.contacts
+      dispatch(deletedContact(contacts))
     })
   }
 }

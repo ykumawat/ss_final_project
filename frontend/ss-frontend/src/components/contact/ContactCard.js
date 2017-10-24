@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
 class ContactCard extends React.Component {
 
   state = {
-    open: false
+    modalOpen: false
   }
 
   editContact = (event) => {
@@ -16,15 +16,15 @@ class ContactCard extends React.Component {
     this.props.editContact(this.props.contact.id, this.state.name, this.state.company, this.state.email, this.state.phone, this.state.notes)
   }
 
-  emailContact() {
+  deleteContact = (event) => {
+    event.preventDefault()
+    this.props.deleteContact(this.props.contact.id)
+  }
 
+  emailContact() {
   }
 
   shareContact() {
-
-  }
-
-  deleteContact() {
 
   }
 
@@ -63,6 +63,10 @@ class ContactCard extends React.Component {
       notes: event.target.value
     })
   }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
 
   render() {
     const {contact} = this.props
@@ -109,10 +113,18 @@ class ContactCard extends React.Component {
                     </Modal.Content>
                   </Modal>
 
-                  <Modal trigger={<Button icon color='red'><Icon name='delete'/></Button>}>
+                  <Modal basic size="small" open={this.state.modalOpen} onClose={this.handleClose} trigger={<Button onClick={this.handleOpen} icon color='red'><Icon name='delete'/></Button>}>
                     <Modal.Content>
-                      //form for delete here
-                    </Modal.Content>
+                          <h3>Are you sure you want to delete this contact?</h3>
+                          <Modal.Actions>
+                            <Button color='green' onClick={this.deleteContact} inverted>
+                              <Icon name='checkmark' /> Yes, I'm sure.
+                            </Button>
+                            <Button color='red' onClick={this.handleClose} inverted>
+                              <Icon name='cancel' /> No, keep it!
+                            </Button>
+                          </Modal.Actions>
+                        </Modal.Content>
                   </Modal>
 
                 </Modal.Actions>
