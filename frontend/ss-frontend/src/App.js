@@ -11,6 +11,8 @@ import { Route, Redirect, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as UserActions from './actions/user'
+import { Grid, List, Loader, Modal, Button} from 'semantic-ui-react'
+
 // NOTE: (10/11/17) add semantic for styling later on
 
 

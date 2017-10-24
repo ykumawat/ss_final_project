@@ -64,17 +64,8 @@ class ContactCard extends React.Component {
     })
   }
 
-  open = () => this.setState({ open: true })
-
-  close = () => {
-    this.setState({
-      open: false
-    })
-  }
-
   render() {
     const {contact} = this.props
-    const { open } = this.state
     return (
       <div>
         <Card>
@@ -93,7 +84,7 @@ class ContactCard extends React.Component {
               {contact.name}
               <div align='right'>
                 <Modal.Actions>
-                  <Modal open={open} onOpen={this.open} onClose={this.close} trigger={<Button icon color='teal'><Icon name='edit'/></Button>}>
+                  <Modal trigger={<Button icon color='teal'><Icon name='edit'/></Button>}>
                     <Modal.Content>
                       <Form onSubmit={this.editContact}>
                         <Form.Input type="text" label="Name: " defaultValue={contact.name} onChange={this.handleChangeName}/>
@@ -101,7 +92,7 @@ class ContactCard extends React.Component {
                         <Form.Input type="text" label="Email: " defaultValue={contact.email} onChange={this.handleChangeEmail}/>
                         <Form.Input type="text" label="Phone: " defaultValue={contact.phone} onChange={this.handleChangePhone}/>
                         <Form.Input type="text" label="Notes: " defaultValue={contact.notes} onChange={this.handleChangeNotes}/>
-                        <Form.Button onClick={this.close}>Update Contact</Form.Button>
+                        <Form.Button>Update Contact</Form.Button>
                       </Form>
                     </Modal.Content>
                   </Modal>
