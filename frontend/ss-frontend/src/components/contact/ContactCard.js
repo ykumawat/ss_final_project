@@ -7,10 +7,13 @@ import { bindActionCreators } from 'redux'
 
 class ContactCard extends React.Component {
 
+  state = {
+    open: false
+  }
+
   editContact = (event) => {
     event.preventDefault()
-    console.log(this.state.id, this.state.name, this.state.company, this.state.email, this.state.phone, this.state.notes)
-    this.props.editContact(this.props.id, this.state.name, this.state.company, this.state.email, this.state.phone, this.state.notes)
+    this.props.editContact(this.props.contact.id, this.state.name, this.state.company, this.state.email, this.state.phone, this.state.notes)
   }
 
   emailContact() {
@@ -61,13 +64,17 @@ class ContactCard extends React.Component {
     })
   }
 
+  open = () => this.setState({ open: true })
+
+  close = () => {
+    this.setState({
+      open: false
+    })
+  }
+
   render() {
     const {contact} = this.props
-
-    this.setState({
-      id: this.props.id
-    })
-
+    const { open } = this.state
     return (
       <div>
         <Card>
@@ -86,7 +93,7 @@ class ContactCard extends React.Component {
               {contact.name}
               <div align='right'>
                 <Modal.Actions>
-                  <Modal trigger={<Button icon color='teal'><Icon name='edit'/></Button>}>
+                  <Modal open={open} onOpen={this.open} onClose={this.close} trigger={<Button icon color='teal'><Icon name='edit'/></Button>}>
                     <Modal.Content>
                       <Form onSubmit={this.editContact}>
                         <Form.Input type="text" label="Name: " defaultValue={contact.name} onChange={this.handleChangeName}/>
@@ -94,7 +101,7 @@ class ContactCard extends React.Component {
                         <Form.Input type="text" label="Email: " defaultValue={contact.email} onChange={this.handleChangeEmail}/>
                         <Form.Input type="text" label="Phone: " defaultValue={contact.phone} onChange={this.handleChangePhone}/>
                         <Form.Input type="text" label="Notes: " defaultValue={contact.notes} onChange={this.handleChangeNotes}/>
-                        <Form.Button>Update Contact</Form.Button>
+                        <Form.Button onClick={this.close}>Update Contact</Form.Button>
                       </Form>
                     </Modal.Content>
                   </Modal>

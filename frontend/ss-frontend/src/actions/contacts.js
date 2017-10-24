@@ -11,10 +11,10 @@ function fetchingInfo() {
   }
 }
 
-function updatedContact(contact) {
+function updatedContact(contacts) {
   return {
     type: "CONTACT_UPDATED",
-    payload: contact
+    payload: contacts
   }
 }
 
@@ -55,18 +55,17 @@ export function editContact(id, name, company, email, phone, notes) {
       }
     }).then((res) => res.json())
     .then((json) => {
-      console.log(json)
-      // const contact = json.contact
-      // dispatch(updatedContact(contact))
+      const contacts = json.contacts
+      dispatch(updatedContact(contacts))
     })
   }
 }
 
-export function deleteContact(contact) {
-  const body = JSON.stringify(contact)
+export function deleteContact(id) {
+  const body = JSON.stringify({id: id})
   return function(dispatch) {
     const jwtToken = localStorage.getItem("jwtToken")
-    fetch('http://localhost:3000/api/v1/users/me', {
+    fetch(`http://localhost:3000/api/v1/contacts/${id}`, {
       method: 'DELETE',
       body: body,
       headers: {
