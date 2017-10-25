@@ -5,7 +5,7 @@ import ToggleDisplay from 'react-toggle-display'
 import { Route, Link, withRouter } from 'react-router-dom'
 import AddNewImageForm from '../forms/AddNewImageForm'
 import UserActions from '../../actions/user'
-import { Grid, List, Loader, Modal, Button, Image} from 'semantic-ui-react'
+import { Grid, List, Loader, Modal, Button, Image, Segment, Divider} from 'semantic-ui-react'
 import LinkedInContainer from './LinkedInContainer'
 import NewsFeed from './NewsFeedContainer'
 import MeetUp from './MeetUp'
@@ -24,7 +24,7 @@ class ProfilesContainer extends React.Component {
           <LinkedInContainer/>
         </div>
         <Grid divided='vertically'>
-          <Grid.Row columns={3}>
+          <Grid.Row columns={2}>
             <Grid.Column>
               You have {this.props.contacts.length} contacts:
               <Modal trigger={<Button>Show</Button>}>
@@ -38,15 +38,7 @@ class ProfilesContainer extends React.Component {
               </Modal>
             </Grid.Column>
 
-            <Grid.Column>
-              You have {this.props.slides.length} contacts:
-              <Modal trigger={<Button>Show</Button>}>
-                ok,,,i get it! also, this was just slides again until other gets added to backend
-              </Modal>
-            </Grid.Column>
-
           </Grid.Row>
-
           <Grid.Row columns={2}>
             <Grid.Column>
               <NewsFeed/>

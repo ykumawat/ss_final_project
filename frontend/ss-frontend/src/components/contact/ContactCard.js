@@ -29,18 +29,11 @@ class ContactCard extends React.Component {
   }
 
   makeContactPublic = (event) => {
-
     if (this.props.contact.shared === true) {
-      this.setState({
-        active: true
-      })
+      this.props.removeContactFromNewsFeed(this.props.contact.id)
     } else {
-      this.setState({
-        active: false
-      })
+      this.props.shareContactOnNewsFeed(this.props.contact.id)
     }
-
-    this.props.shareContactOnNewsFeed(this.props.contact.id, this.props.contact.shared)
   }
 
   handleChangeName = (event) => {
@@ -79,7 +72,6 @@ class ContactCard extends React.Component {
 
   render() {
     const {contact} = this.props
-    const {active} = this.state
     return (
       <div>
         <Card>
@@ -148,7 +140,7 @@ class ContactCard extends React.Component {
                 <p>Phone: {contact.phone}</p>
                 <p>Email: {contact.email}</p>
                 <p>Notes: {contact.notes}</p>
-                <Button toggle active={active} onClick={this.makeContactPublic}>Public</Button>
+                <Button color={this.props.contact.shared ? 'olive' : 'grey'} onClick={this.makeContactPublic}>Public</Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>

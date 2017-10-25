@@ -82,9 +82,30 @@ export function deleteContact(id) {
   }
 }
 
-export function shareContactOnNewsFeed(id, shared) {
+export function shareContactOnNewsFeed(id) {
   const userId = localStorage.getItem("userId")
-  const body = JSON.stringify({id: id, user_id: userId, shared: !shared})
+  const body = JSON.stringify({id: id, user_id: userId})
+  return function(dispatch){
+    const jwtToken = localStorage.getItem("jwtToken")
+    fetch(`http://localhost:3000/api/v1/newsfeed_posts`, {
+      method: 'POST',
+      body: body,
+      headers: {
+        "Authorization": "Bearer" + jwtToken,
+        "Content-Type": 'application/json'
+      }
+    }).then((res) => res.json())
+    .then((json) => {
+      console.log(json)
+      const contacts = json.contacts
+      dispatch(updatedContact(contacts))
+    })
+  }
+}
+
+export function removeContactFromNewsFeed(id) {
+  const userId = localStorage.getItem("userId")
+  const body = JSON.stringify({id: id, user_id: userId, remove: true})
   return function(dispatch){
     const jwtToken = localStorage.getItem("jwtToken")
     fetch(`http://localhost:3000/api/v1/contacts/${id}`, {

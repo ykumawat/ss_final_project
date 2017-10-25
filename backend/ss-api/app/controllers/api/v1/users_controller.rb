@@ -33,10 +33,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def destroy
-    # something
-  end
-
   def me
     if @current_user
       contacts = @current_user.contacts
