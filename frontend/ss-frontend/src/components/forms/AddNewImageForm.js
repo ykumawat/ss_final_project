@@ -1,7 +1,7 @@
 import React from 'react'
 import * as ImageActions from '../../actions/images'
 import { Route, Link, withRouter } from 'react-router-dom'
-import { Card, Button, Icon, Image, Modal, Form } from 'semantic-ui-react'
+import { Card, Button, Icon, Image, Modal, Form, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -157,7 +157,11 @@ class AddNewImageForm extends React.Component {
             <Button onClick={this.handleChangeURL}>Change Image</Button>
           </div>
           <form onSubmit={this.handleNewContact}>
-            <Image src={this.props.url}></Image>
+            <Grid columns={2}>
+              <Grid.Column>
+                <Image src={this.props.url} size='large'></Image>
+              </Grid.Column>
+              <Grid.Column>
             <div>
               Name: {nameInputs}
             </div>
@@ -176,6 +180,8 @@ class AddNewImageForm extends React.Component {
             <div>
               Notes: {noteInputs}
             </div>
+          </Grid.Column>
+          </Grid>
               <Button type="submit">Save Contact</Button>
           </form>
         </div>
@@ -195,11 +201,16 @@ class AddNewImageForm extends React.Component {
             <Button onClick={this.handleChangeURL}>Change Image</Button>
           </div>
           <form onSubmit={this.handleNewNote}>
-            <Image src={this.props.url}></Image>
-            <div>
-              Notes: {noteInputs}
-            </div>
-              <Button type="submit">Save Note</Button>
+            <Grid columns={2}>
+              <Grid.Column>
+                <Image src={this.props.url} size='large'></Image>
+              </Grid.Column>
+              <Grid.Column>
+                Notes: {noteInputs}
+
+              </Grid.Column>
+            </Grid>
+            <Button type="submit">Save Note</Button>
           </form>
         </div>
       )
