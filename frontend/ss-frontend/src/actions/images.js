@@ -126,7 +126,10 @@ export function textProcessingNatLang(text) {
       }
     })
     .then((res) => res.json())
-    .then((data) => dispatch(categorizeData(data.entities)))
+    .then((data) => {
+      console.log(data)
+      dispatch(categorizeData(data.entities))
+    })
   }
 }
 

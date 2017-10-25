@@ -4,10 +4,10 @@ function fetchingInfo() {
   }
 }
 
-function loadedNewsfeed(newsfeed) {
+function loadedNewsfeed(posts) {
   return {
     type: "LOADED_NEWSFEED",
-    payload: newsfeed
+    payload: posts
   }
 }
 
@@ -15,15 +15,15 @@ export function loadNewsfeed() {
   return function(dispatch) {
     dispatch(fetchingInfo())
     const jwtToken = localStorage.getItem("jwtToken")
-    fetch('http://localStorage:3000/api/v1/newsfeed', {
+    fetch('http://localhost:3000/api/v1/newsfeed_posts', {
       method: 'GET',
       headers: {
         "Authorization": "Bearer" + jwtToken
       }
     }).then((res) => res.json())
     .then((json) => {
-      const newsfeed = json.newsfeed
-      dispatch(loadedNewsfeed(newsfeed))
+      const posts = json.posts
+      dispatch(loadedNewsfeed(posts))
     })
   }
 }

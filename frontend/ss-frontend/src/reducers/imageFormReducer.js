@@ -1,4 +1,4 @@
-function imageFormReducer(state = {isRendering: false, isFetching: false, url: undefined, name: [], organization: [], location: [], email: [], phone: [], notes: []}, action) {
+function imageFormReducer(state = {isRendering: false, isFetching: false, url: undefined, name: [], organization: [], location: [], email: [""], phone: [""], notes: [], text: []}, action) {
   switch(action.type) {
     case "SUBMIT_FORM":
       return Object.assign({}, state, {url: action.payload.url, name: action.payload.name, organization: action.payload.organization, email: action.payload.email, phone: action.payload.phone, notes: action.payload.notes, image: action.payload.image})
@@ -22,6 +22,8 @@ function imageFormReducer(state = {isRendering: false, isFetching: false, url: u
       return Object.assign({}, state, {email: action.payload})
     case "ADD_NOTES":
       return Object.assign({}, state, {notes: action.payload})
+    case "ADD_TEXT":
+      return Object.assign({}, state, {text: action.payload})
     default:
       return state
   }

@@ -30,14 +30,16 @@ class ContactCard extends React.Component {
 
   makeContactPublic = (event) => {
 
-    if (this.props.contact.shared) {
-
+    if (this.props.contact.shared === true) {
+      this.setState({
+        active: true
+      })
+    } else {
+      this.setState({
+        active: false
+      })
     }
 
-
-    this.setState({
-      active: !this.state.active
-    })
     this.props.shareContactOnNewsFeed(this.props.contact.id, this.props.contact.shared)
   }
 

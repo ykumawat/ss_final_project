@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ProfilesContainer from './components/profile/ProfilesContainer'
 import ContactsContainer from './components/contact/ContactsContainer'
 import SlidesContainer from './components/slide/SlidesContainer'
-import MiscContainer from './components/misc/MiscContainer'
 import Nav from './components/Nav'
 import Home from './components/Home'
 import LoginForm from './components/forms/LoginForm'

@@ -23,7 +23,6 @@ class Nav extends React.Component {
           <NavLink activeClassName="active" className="center item" to="/me">My Profile</NavLink>
           <NavLink activeClassName="active" className="center item" to="/contacts">Contacts</NavLink>
           <NavLink activeClassName="active" className="center item" to="/slides">Slides</NavLink>
-          <NavLink activeClassName="active" className="center item" to="/misc">Misc</NavLink>
           <NavLink activeClassName="active" className="right item" onClick={this.props.logoutUser} to="/">Log Out</NavLink>
         </div>
       )

@@ -10,6 +10,10 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def update
+    current_user = User.find(params[:user_id].to_i)
+    contacts = current_user.contacts
+    slides = current_user.slides
+    friends = current_user.friends
     if params[:shared]
       NewsfeedPost.create(user_id: params[:user_id], contact_id: params[:id])
       render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
@@ -20,10 +24,6 @@ class Api::V1::ContactsController < ApplicationController
     else
       @contact = Contact.find(params[:id].to_i)
       @contact.update(contact_params)
-      current_user = User.find(params[:user_id].to_i)
-      contacts = current_user.contacts
-      slides = current_user.slides
-      friends = current_user.friends
       render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
     end
   end

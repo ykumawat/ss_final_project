@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :contacts
       resources :slides
+      resources :newsfeed_posts
       get '/users', to: 'users#index'
       post '/users', to: 'users#create'
       get '/users/me', to: 'users#me'

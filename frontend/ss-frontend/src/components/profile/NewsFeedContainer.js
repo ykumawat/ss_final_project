@@ -18,6 +18,7 @@ class NewsFeedContainer extends React.Component {
   render() {
     if (this.props.posts) {
       const mappedPosts = this.props.posts.map((post) => {
+        debugger
         return (post)
       })
       return(
