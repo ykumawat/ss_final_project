@@ -29,6 +29,12 @@ class ContactCard extends React.Component {
   }
 
   makeContactPublic = (event) => {
+
+    if (this.props.contact.shared) {
+
+    }
+
+
     this.setState({
       active: !this.state.active
     })

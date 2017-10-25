@@ -76,7 +76,6 @@ export function deleteContact(id) {
       }
     }).then((res) => res.json())
     .then((json) => {
-      console.log(json)
       const contacts = json.contacts
       dispatch(deletedContact(contacts))
     })
@@ -84,5 +83,50 @@ export function deleteContact(id) {
 }
 
 export function shareContactOnNewsFeed(id, shared) {
-  console.log(id, shared)
+  const userId = localStorage.getItem("userId")
+  const body = JSON.stringify({id: id, user_id: userId, shared: !shared})
+  return function(dispatch){
+    const jwtToken = localStorage.getItem("jwtToken")
+    fetch(`http://localhost:3000/api/v1/contacts/${id}`, {
+      method: 'PATCH',
+      body: body,
+      headers: {
+        "Authorization": "Bearer" + jwtToken,
+        "Content-Type": 'application/json'
+      }
+    }).then((res) => res.json())
+    .then((json) => {
+      const contacts = json.contacts
+      dispatch(updatedContact(contacts))
+    })
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
