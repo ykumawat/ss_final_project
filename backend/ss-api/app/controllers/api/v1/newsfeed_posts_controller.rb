@@ -1,9 +1,21 @@
 class Api::V1::NewsfeedPostsController < ApplicationController
-  skip_before_action :authenticate
+  skip_before_action :authenticate, only: [:index]
 
   def index
     @posts = NewsfeedPost.all
-    render json: @posts, status: 200
+    mapped_posts = []
+    @posts.map do |e|
+      if e.contact_id != nil
+        contact = Contact.find(e.contact_id)
+        contactLikes = [contact, e.likes]
+        mapped_posts.push(contactLikes)
+      else
+        slide = Slide.find(e.slide_id)
+        slideLikes = [slide, e.likes]
+        mapped_posts.push(slideLikes)
+      end
+    end
+    render json: {postInfo: mapped_posts}, status: 200
   end
 
   def show

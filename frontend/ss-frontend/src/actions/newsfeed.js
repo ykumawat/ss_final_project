@@ -22,8 +22,7 @@ export function loadNewsfeed() {
       }
     }).then((res) => res.json())
     .then((json) => {
-      const posts = json.posts
-      dispatch(loadedNewsfeed(posts))
+      dispatch(loadedNewsfeed(json.postInfo))
     })
   }
 }
