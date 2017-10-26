@@ -21,13 +21,6 @@ class ContactCard extends React.Component {
     this.props.deleteContact(this.props.contact.id)
   }
 
-  emailContact() {
-  }
-
-  shareContact() {
-
-  }
-
   makeContactPublic = (event) => {
     if (this.props.contact.shared === true) {
       this.props.removeContactFromNewsFeed(this.props.contact.id)
@@ -72,6 +65,13 @@ class ContactCard extends React.Component {
 
   render() {
     const {contact} = this.props
+    const dateCreated = contact.created_at.split("-")
+    dateCreated[2] = dateCreated[2].substring(0,2)
+    const d = new Date(dateCreated)
+    const month = d.getMonth()+1
+    const day = d.getDate()
+    const year = d.getFullYear()
+
     return (
       <div>
         <Card>
@@ -81,7 +81,7 @@ class ContactCard extends React.Component {
               <br/>
               {contact.name}
               <br/>
-              {contact.created_at}
+              Added on: {month} {day}, {year}
               <br/>
             </Card.Header>
           </Card.Content>
@@ -100,18 +100,6 @@ class ContactCard extends React.Component {
                         <Form.Input type="text" label="Notes: " defaultValue={contact.notes} onChange={this.handleChangeNotes}/>
                         <Form.Button>Update Contact</Form.Button>
                       </Form>
-                    </Modal.Content>
-                  </Modal>
-
-                  <Modal trigger={<Button icon color='green'><Icon name='mail outline'/></Button>}>
-                    <Modal.Content>
-                      //form for email here
-                    </Modal.Content>
-                  </Modal>
-
-                  <Modal trigger={<Button icon color='yellow'><Icon name='share'/></Button>}>
-                    <Modal.Content>
-                      //form for share here
                     </Modal.Content>
                   </Modal>
 

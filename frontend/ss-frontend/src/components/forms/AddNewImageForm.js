@@ -124,51 +124,67 @@ class AddNewImageForm extends React.Component {
       )
     } else if (this.state.imageFormType === "contact") {
         const nameInputs = this.props.name.map(n => {
-          return (
-            <div>
-              <Form.Input type="text" defaultValue={n.name} onChange={this.handleChangeName} width="180" height="25"/>
-            </div>
-          )
+          if (n === "") {
+            return (
+              <div>
+                <Form.Input type="text" defaultValue="" onChange={this.handleChangeName} />
+              </div>
+            )
+          } else {
+            return (
+              <div>
+                <Form.Input type="text" defaultValue={n} onChange={this.handleChangeName} />
+              </div>
+            )
+          }
         })
 
         const orgInputs = this.props.organization.map(org => {
-          return (
-            <div>
-              <Form.Input type="text" defaultValue={org.name} onChange={this.handleChangeOrg} width="180" height="25"/>
-            </div>
-          )
-        })
-
-        const locInputs = this.props.location.map(loc => {
-          return (
-            <div>
-              <Form.Input type="text" defaultValue={loc.name} onChange={this.handleChangeLoc} width="180" height="25"/>
-            </div>
-          )
+          if (org === "") {
+            return (
+              <div>
+                <Form.Input type="text" defaultValue="" onChange={this.handleChangeOrg} />
+              </div>
+            )
+          } else{
+            return (
+              <div>
+                <Form.Input type="text" defaultValue={org} onChange={this.handleChangeOrg} />
+              </div>
+            )
+          }
         })
 
         const noteInputs = this.props.notes.map(note => {
-          return (
-            <div>
-              <Form.Input type="text" defaultValue={note.name} onChange={this.handleChangeNote} width="180" height="25"/>
-            </div>
-          )
+          if (note === "") {
+            return (
+              <div>
+                <Form.Input type="text" defaultValue="" onChange={this.handleChangeNote} />
+              </div>
+            )
+          } else{
+            return (
+              <div>
+                <Form.Input type="text" defaultValue={note} onChange={this.handleChangeNote} />
+              </div>
+            )
+          }
         })
 
         const emailInputs = this.props.email.map(e => {
-          return (
-            <div>
-              <Form.Input type="text" defaultValue={e} onChange={this.handleChangeEmail} width="180" height="25"/>
-            </div>
-          )
-        })
-
-        const phoneInputs = this.props.email.map(p => {
-          return (
-            <div>
-              <Form.Input type="text" defaultValue={p} onChange={this.handleChangePhone} width="180" height="25"/>
-            </div>
-          )
+          if (e === "") {
+            return (
+              <div>
+                <Form.Input type="text" defaultValue="" onChange={this.handleChangeEmail} />
+              </div>
+            )
+          } else{
+            return (
+              <div>
+                <Form.Input type="text" defaultValue={e} onChange={this.handleChangeEmail} />
+              </div>
+            )
+          }
         })
 
       return (
@@ -189,13 +205,7 @@ class AddNewImageForm extends React.Component {
               Organization: {orgInputs}
             </div>
             <div>
-              Location: {locInputs}
-            </div>
-            <div>
               Email: {emailInputs}
-            </div>
-            <div>
-              Phone: {phoneInputs}
             </div>
             <div>
               Notes: {noteInputs}

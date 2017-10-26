@@ -145,13 +145,13 @@ function categorizeData(contactData) {
   let other = []
   contactData.map((entity) => {
     if (entity.type === "ORGANIZATION") {
-      orgs.push(entity)
+      orgs.push(entity.name)
     } else if (entity.type === "PERSON" && entity.name.split(" ").length > 1) {
-      person.push(entity)
+      person.push(entity.name)
     } else if (entity.type === "LOCATION") {
-      locations.push(entity)
+      locations.push(entity.name)
     } else {
-      other.push(entity)
+      other.push(entity.name)
     }
   })
   return function(dispatch) {

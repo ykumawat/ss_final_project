@@ -45,7 +45,7 @@ export function loadUserContacts() {
 export function editContact(id, name, company, email, phone, notes) {
   const userId = localStorage.getItem("userId")
   const body = JSON.stringify({id: id, user_id: userId, name: name, company: company, email: email, phone: phone, notes: notes})
-  return function(dispatch) {
+  return function(dispatch){
     const jwtToken = localStorage.getItem("jwtToken")
     fetch(`http://localhost:3000/api/v1/contacts/${id}`, {
       method: 'PATCH',
@@ -65,7 +65,7 @@ export function editContact(id, name, company, email, phone, notes) {
 export function deleteContact(id) {
   const userId = localStorage.getItem("userId")
   const body = JSON.stringify({id: id, user_id: userId})
-  return function(dispatch) {
+  return function(dispatch){
     const jwtToken = localStorage.getItem("jwtToken")
     fetch(`http://localhost:3000/api/v1/contacts/${id}`, {
       method: 'DELETE',
@@ -84,14 +84,13 @@ export function deleteContact(id) {
 
 export function returnState() {
   return (dispatch, getState) => {
-    addContactToUser(getState().imageForm)
+    dispatch(addContactToUser(getState().imageForm))
   }
 }
 
 export function addContactToUser(formInputs) {
   const userId = localStorage.getItem("userId")
-  debugger
-  const body = JSON.stringify({user_id: userId, name: formInputs.name.name.first, email: formInputs.email.name.first, phone: formInputs.phone.name.first, notes: formInputs.notes.name.first, company: formInputs.company.name.first})
+  const body = JSON.stringify({user_id: userId, name: formInputs.name[0], notes: formInputs.notes[0], company: formInputs.organization[0], url: formInputs.url})
   return function(dispatch) {
     const jwtToken = localStorage.getItem("jwtToken")
     fetch(`http://localhost:3000/api/v1/contacts`, {
@@ -111,7 +110,7 @@ export function addContactToUser(formInputs) {
 
 export function shareContactOnNewsFeed(id) {
   const userId = localStorage.getItem("userId")
-  const body = JSON.stringify({id: id, user_id: userId})
+  const body = JSON.stringify({contact_id: id, user_id: userId})
   return function(dispatch){
     const jwtToken = localStorage.getItem("jwtToken")
     fetch(`http://localhost:3000/api/v1/newsfeed_posts`, {

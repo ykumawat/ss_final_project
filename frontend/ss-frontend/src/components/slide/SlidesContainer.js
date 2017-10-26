@@ -16,8 +16,8 @@ class SlidesContainer extends React.Component {
   render() {
     return(
       <div>
-        <h2 align="center">Your Slides</h2>
-           <Route exact path="/slides" render={(props) => <SlidesList slides={this.props.slideList} {...props} />}/>
+        <h2 align="center">Your Notes</h2>
+           <Route exact path="/notes" render={(props) => <SlidesList slides={this.props.slideList} {...props} />}/>
       </div>
     )
   }

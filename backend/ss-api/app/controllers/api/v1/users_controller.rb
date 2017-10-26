@@ -27,11 +27,6 @@ class Api::V1::UsersController < ApplicationController
     user = User.find(params[:id])
   end
 
-  def update
-    if @current_user
-      byebug
-    end
-  end
 
   def me
     if @current_user
@@ -48,7 +43,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password, :name, :profile_image)
+    params.permit(:email, :password, :name, :profile_image, :zipcode)
   end
 
 end

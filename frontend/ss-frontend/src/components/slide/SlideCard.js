@@ -19,10 +19,6 @@ class SlideCard extends React.Component {
     this.props.editSlide(this.props.slide.id, this.state.text, this.state.topic)
   }
 
-  shareSlide() {
-
-  }
-
   deleteSlide = (event) => {
     event.preventDefault()
     this.props.deleteSlide(this.props.slide.id)
@@ -38,6 +34,14 @@ class SlideCard extends React.Component {
     this.setState({
       text: event.target.value
     })
+  }
+
+  makeSlidePublic = (event) => {
+    if (this.props.slide.shared === true) {
+      this.props.removeSlideFromNewsFeed(this.props.slide.id)
+    } else {
+      this.props.shareSlideOnNewsFeed(this.props.slide.id)
+    }
   }
 
   handleOpen = () => this.setState({ modalOpen: true })
@@ -92,8 +96,9 @@ class SlideCard extends React.Component {
               <Image wrapped size='medium' src={slide.url}/>
               <Modal.Description>
                 <br/>
-                <p>Topic: {slide.topic}</p>
-                <p>Text: {slide.text}</p>
+                <p>Topic: <br/> {slide.topic}</p>
+                <p>Text: <br/> {slide.text}</p>
+                <Button color={this.props.slide.shared ? 'olive' : 'grey'} onClick={this.makeSlidePublic}>Public</Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>

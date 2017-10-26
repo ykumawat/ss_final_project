@@ -34,7 +34,7 @@ class App extends Component {
           <Route exact path="/" exact component={Home} />
           <Route path="/me" component={ProfilesContainer} />
           <Route path="/contacts" component={ContactsContainer} />
-          <Route path="/slides" component={SlidesContainer} />
+          <Route path="/notes" component={SlidesContainer} />
           <Route path="/login" component={LoginForm} />
           <Route path="/signup" component={SignUpForm} />
         </div>

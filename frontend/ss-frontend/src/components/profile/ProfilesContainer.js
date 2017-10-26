@@ -32,32 +32,35 @@ class ProfilesContainer extends React.Component {
     })
     return (
       <div>
-        <Grid divided='vertically'>
-          <Grid.Row columns={3}>
-            <Grid.Column>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={8}>
               <h2>Welcome, {this.props.user.name}!</h2>
-              <Image wrapped size='small' src={this.props.user.profile_image} bordered/>
+              <Image wrapped size='medium' src={this.props.user.profile_image} bordered/>
             </Grid.Column>
-            <Grid.Column>
-              You have {this.props.contacts.length} contacts:
-              <Modal trigger={<Button>Show</Button>}>
-                {ContactList}
-              </Modal>
-            </Grid.Column>
-            <Grid.Column>
-              You have {this.props.slides.length} slides:
-              <Modal trigger={<Button>Show</Button>}>
-                {SlideList}
-              </Modal>
-            </Grid.Column>
-
-          </Grid.Row>
-          <Grid.Row columns={2}>
-            <Grid.Column>
+            <Grid.Column width={8}>
               <NewsFeed/>
             </Grid.Column>
+          </Grid.Row>
 
-            <Grid.Column>
+          <Grid.Row>
+            <Grid.Column width={8}>
+              <Grid.Row>
+                You have {this.props.contacts.length} contacts:
+                <br/>
+                <Modal trigger={<Button>Show</Button>}>
+                  {ContactList}
+                </Modal>
+              </Grid.Row>
+              <Grid.Row>
+                You have {this.props.slides.length} notes:
+                <br/>
+                <Modal trigger={<Button>Show</Button>}>
+                  {SlideList}
+                </Modal>
+              </Grid.Row>
+            </Grid.Column>
+            <Grid.Column width={8}>
               <MeetUp/>
             </Grid.Column>
           </Grid.Row>

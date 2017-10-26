@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :newsfeed_posts
   # devise_for :users
   namespace :api do
     namespace :v1 do

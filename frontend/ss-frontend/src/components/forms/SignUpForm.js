@@ -15,6 +15,7 @@ class SignUpForm extends React.Component {
       passwordInput: "",
       nameInput: "",
       urlInput: "",
+      zipcodeInput: "",
       user: {}
     }
   }
@@ -22,7 +23,7 @@ class SignUpForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
     if (this.state.emailInput !== "" && this.state.passwordInput !== "") {
-      this.props.signupUser(this.state.emailInput, this.state.passwordInput, this.state.urlInput, this.state.nameInput)
+      this.props.signupUser(this.state.emailInput, this.state.passwordInput, this.state.urlInput, this.state.nameInput, this.state.zipcodeInput)
     }
   }
 
@@ -44,6 +45,12 @@ class SignUpForm extends React.Component {
     })
   }
 
+  handleZipcodeChange = (event) => {
+    this.setState({
+      zipcodeInput: event.target.value
+    })
+  }
+
   handlePasswordChange = (event) => {
     this.setState({
       passwordInput: event.target.value
@@ -59,6 +66,7 @@ class SignUpForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Input type="text" value={this.state.nameInput} onChange={this.handleNameChange} placeholder="name" />
             <Form.Input type="text" value={this.state.urlInput} onChange={this.handleURLChange} placeholder="profile image" />
+            <Form.Input type="text" value={this.state.zipcodeInput} onChange={this.handleZipcodeChange} placeholder="email" />
             <Form.Input type="text" value={this.state.emailInput} onChange={this.handleEmailChange} placeholder="email" />
             <Form.Input type="password" value={this.state.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
             <Form.Button>Submit</Form.Button>

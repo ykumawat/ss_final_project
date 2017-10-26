@@ -32,7 +32,7 @@ class Nav extends React.Component {
           <NavLink activeClassName="active" to="/contacts">Contacts</NavLink>
         </Menu.Item>
         <Menu.Item>
-          <NavLink activeClassName="active" to="/slides">Slides</NavLink>
+          <NavLink activeClassName="active" to="/notes">Notes</NavLink>
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item>

@@ -44,8 +44,8 @@ export function loginUser(email, password) {
 
 }
 
-export function signupUser(email, password, image, name) {
-  const body = JSON.stringify({email: email, password: password, image: image, name: name})
+export function signupUser(email, password, image, name, zipcode) {
+  const body = JSON.stringify({email: email, password: password, image: image, name: name, zipcode: zipcode})
   return function(dispatch) {
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',

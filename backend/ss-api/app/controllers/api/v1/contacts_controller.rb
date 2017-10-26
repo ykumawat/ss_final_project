@@ -1,5 +1,6 @@
 class Api::V1::ContactsController < ApplicationController
   skip_before_action :authenticate
+
   def index
     @contacts = Contact.all
     render json: @contacts, status: 200
@@ -10,12 +11,14 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.create(contact_params)
-    current_user = User.find(params[:user_id].to_i)
-    contacts = current_user.contacts
-    slides = current_user.slides
-    friends = current_user.friends
-    render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
+    @contact = Contact.new(contact_params)
+    if @contact.save
+      current_user = User.find(params[:user_id].to_i)
+      contacts = current_user.contacts
+      slides = current_user.slides
+      friends = current_user.friends
+      render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
+    end
   end
 
   def update
