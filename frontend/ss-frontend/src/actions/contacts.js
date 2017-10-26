@@ -148,3 +148,24 @@ export function removeContactFromNewsFeed(id) {
     })
   }
 }
+
+
+export function addContactLikeToUser(contactID) {
+  const userId = localStorage.getItem("userId")
+  const body = JSON.stringify({user_id: userId, id: contactID})
+  return function(dispatch) {
+    const jwtToken = localStorage.getItem("jwtToken")
+    fetch(`http://localhost:3000/api/v1/contacts`, {
+      method: 'POST',
+      body: body,
+      headers: {
+        "Authorization": "Bearer" + jwtToken,
+        "Content-Type": 'application/json'
+      }
+    }).then((res) => res.json())
+    .then((json) => {
+      const contacts = json.contacts
+      dispatch(updatedContact(contacts))
+    })
+  }
+}

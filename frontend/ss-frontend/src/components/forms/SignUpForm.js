@@ -66,7 +66,7 @@ class SignUpForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Input type="text" value={this.state.nameInput} onChange={this.handleNameChange} placeholder="name" />
             <Form.Input type="text" value={this.state.urlInput} onChange={this.handleURLChange} placeholder="profile image" />
-            <Form.Input type="text" value={this.state.zipcodeInput} onChange={this.handleZipcodeChange} placeholder="email" />
+            <Form.Input type="text" value={this.state.zipcodeInput} onChange={this.handleZipcodeChange} placeholder="zipcode" />
             <Form.Input type="text" value={this.state.emailInput} onChange={this.handleEmailChange} placeholder="email" />
             <Form.Input type="password" value={this.state.passwordInput} onChange={this.handlePasswordChange} placeholder="password"/>
             <Form.Button>Submit</Form.Button>
