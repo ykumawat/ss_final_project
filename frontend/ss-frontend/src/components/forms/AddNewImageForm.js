@@ -1,5 +1,7 @@
 import React from 'react'
 import * as ImageActions from '../../actions/images'
+import * as ContactActions from '../../actions/contacts'
+import * as SlideActions from '../../actions/slides'
 import { Route, Link, withRouter } from 'react-router-dom'
 import { Card, Button, Icon, Image, Modal, Form, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
@@ -9,11 +11,11 @@ class AddNewImageForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.fetchImageInfo(this.props.url)
+    this.props.actions.ImageActions.fetchImageInfo(this.props.url, this.state.imageFormType)
   }
 
   handleInputSubmit = (event) => {
-    this.props.fetchingInfoImageToText(event.target.value)
+    this.props.actions.ImageActions.fetchingInfoImageToText(event.target.value)
   }
 
   handleChangeURL = (event) => {
@@ -21,37 +23,65 @@ class AddNewImageForm extends React.Component {
   }
 
   handleChangeName = (event) => {
-    this.props.addPerson(event.target.value)
+    if (event.target.value === "" ) {
+      this.props.actions.ImageActions.addPerson([event.target.defaultValue])
+    } else {
+      this.props.actions.ImageActions.addPerson([event.target.value])
+    }
   }
 
   handleChangeOrg = (event) => {
-    this.props.addOrganization(event.target.value)
+    if (event.target.value === "" ) {
+      this.props.actions.ImageActions.addOrganization([event.target.defaultValue])
+    } else {
+      this.props.actions.ImageActions.addOrganization([event.target.value])
+    }
   }
 
   handleChangeLoc = (event) => {
-    this.props.addLocation(event.target.value)
+    if (event.target.value === "" ) {
+      this.props.actions.ImageActions.addLocation([event.target.defaultValue])
+    } else {
+      this.props.actions.ImageActions.addLocation([event.target.value])
+    }
   }
 
   handleChangeNote = (event) => {
-    this.props.addNotes(event.target.value)
+    if (event.target.value === "" ) {
+      this.props.actions.ImageActions.addNotes([event.target.defaultValue])
+    } else {
+      this.props.actions.ImageActions.addNotes([event.target.value])
+    }
   }
 
   handleChangePhone = (event) => {
-    this.props.addPhone(event.target.value)
+    if (event.target.value === "" ) {
+      this.props.actions.ImageActions.addPhone([event.target.defaultValue])
+    } else {
+      this.props.actions.ImageActions.addPhone([event.target.value])
+    }
   }
 
   handleChangeEmail = (event) => {
-    this.props.addEmail(event.target.value)
+    if (event.target.value === "") {
+      this.props.actions.ImageActions.addEmail([event.target.defaultValue])
+    } else {
+      this.props.actions.ImageActions.addEmail([event.target.value])
+    }
   }
 
   handleNewContact = (event) => {
     event.preventDefault()
-    this.props.addContactToUser()
+    this.props.actions.ContactActions.returnState()
   }
 
   handleNewNote = (event) => {
     event.preventDefault()
-    console.log("something")
+    this.props.actions.SlideActions.returnState()
+  }
+
+  handleNewTopic = (event) => {
+    this.props.actions.ImageActions.addTopic(event.target.value)
   }
 
   imageType = (event) => {
@@ -59,24 +89,14 @@ class AddNewImageForm extends React.Component {
       this.setState({
         imageFormType: "contact"
       })
-    } else {
+    } else if (event.target.value === "notes") {
       this.setState({
         imageFormType: "notes"
       })
+    } else {
+      null
     }
   }
-
-  // removeField() {
-  //   console.log("gotta fix this");
-  // }
-
-  // addField = (event) => {
-  //   return(
-  //     <div>
-  //       <input type="text"></input>
-  //     </div>
-  //   )
-  // }
 
   render() {
     if (this.props.isRendering === false) {
@@ -190,11 +210,10 @@ class AddNewImageForm extends React.Component {
       const noteInputs = this.props.notes.map(note => {
         return (
           <div>
-            <Form.Input type="text" defaultValue={note.name} onChange={this.handleChangeNote} width="180" height="25"/>
+            <Form.TextArea type="text" defaultValue={note} onChange={this.handleChangeNote}/>
           </div>
         )
       })
-
       return (
         <div>
           <div>
@@ -206,8 +225,12 @@ class AddNewImageForm extends React.Component {
                 <Image src={this.props.url} size='large'></Image>
               </Grid.Column>
               <Grid.Column>
-                Notes: {noteInputs}
-
+                <div>
+                  <Form.TextArea type="text" onChange={this.handleNewTopic}/>
+                </div>
+                <div>
+                  Notes: {noteInputs}
+                </div>
               </Grid.Column>
             </Grid>
             <Button type="submit">Save Note</Button>
@@ -235,7 +258,13 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ImageActions, dispatch)
+  return {
+    actions: {
+      ImageActions: bindActionCreators(ImageActions, dispatch),
+      ContactActions: bindActionCreators(ContactActions, dispatch),
+      SlideActions: bindActionCreators(SlideActions, dispatch)
+    }
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddNewImageForm))

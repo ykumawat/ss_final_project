@@ -17,11 +17,6 @@ export function changeURL() {
   }
 }
 
-export function addContactToUser() {
-//not sure yet how to work this in
-//makes fetch request to add contact
-}
-
 export function addOrganization(organization) {
   return {
     type: "ADD_ORGANIZATION",
@@ -64,6 +59,12 @@ export function addNotes(notes) {
   }
 }
 
+export function addTopic(topic) {
+  return {
+    type: "ADD_TOPIC",
+    payload: topic
+  }
+}
 
 function exportingForRendering(obj) {
   return {
@@ -72,7 +73,7 @@ function exportingForRendering(obj) {
   }
 }
 
-export function fetchImageInfo(url) {
+export function fetchImageInfo(url, formType) {
   let urlString = url.toString()
 
   const body = JSON.stringify({"requests":[
@@ -99,7 +100,12 @@ export function fetchImageInfo(url) {
       .then((res) => res.json())
       .then((json) => {
         console.log(json.responses[0].fullTextAnnotation.text)
-        dispatch(textProcessingNatLang(json.responses[0].fullTextAnnotation.text))
+        if (formType === 'contact') {
+          dispatch(textProcessingNatLang(json.responses[0].fullTextAnnotation.text))
+        } else {
+          dispatch(addNotes([json.responses[0].fullTextAnnotation.text]))
+          dispatch(renderToUser())
+        }
         // dispatch(textProcessingTextRazor(json.responses[0].fullTextAnnotation.text))
         // dispatch(textProcessingWatson(json.responses[0].fullTextAnnotation.text))
       })
@@ -127,7 +133,6 @@ export function textProcessingNatLang(text) {
     })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data)
       dispatch(categorizeData(data.entities))
     })
   }

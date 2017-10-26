@@ -54,9 +54,6 @@ class SlideCard extends React.Component {
             <Card.Header>
               <br/>
               {slide.topic}
-              <br/>
-              {slide.text}
-              <br/>
             </Card.Header>
           </Card.Content>
           <Modal trigger={<Button>Show Info</Button>}>

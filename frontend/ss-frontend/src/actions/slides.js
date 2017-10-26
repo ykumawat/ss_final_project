@@ -81,3 +81,29 @@ export function deleteSlide(id) {
     })
   }
 }
+
+export function returnState() {
+  return (dispatch, getState) => {
+    dispatch(addNoteToUser(getState().imageForm))
+  }
+}
+
+export function addNoteToUser(formInputs){
+  const userId = localStorage.getItem("userId")
+  const body = JSON.stringify({user_id: userId, text: formInputs.notes[0], url: formInputs.url, topic: formInputs.topic[0]})
+  return function(dispatch) {
+    const jwtToken = localStorage.getItem("jwtToken")
+    fetch(`http://localhost:3000/api/v1/slides`, {
+      method: 'POST',
+      body: body,
+      headers: {
+        "Authorization": "Bearer" + jwtToken,
+        "Content-Type": 'application/json'
+      }
+    }).then((res) => res.json())
+    .then((json) => {
+      const slides = json.slides
+      dispatch(updatedSlide(slides))
+    })
+  }
+}

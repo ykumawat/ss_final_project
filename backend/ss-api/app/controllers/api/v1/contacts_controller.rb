@@ -9,6 +9,15 @@ class Api::V1::ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
   end
 
+  def create
+    @contact = Contact.create(contact_params)
+    current_user = User.find(params[:user_id].to_i)
+    contacts = current_user.contacts
+    slides = current_user.slides
+    friends = current_user.friends
+    render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
+  end
+
   def update
     current_user = User.find(params[:user_id].to_i)
     @contact = Contact.find(params[:id])
@@ -41,7 +50,7 @@ class Api::V1::ContactsController < ApplicationController
 
   private
   def contact_params
-    params.permit(:user_id, :name, :email, :phone, :notes, :company, :shared)
+    params.permit(:user_id, :name, :email, :phone, :notes, :company, :shared, :url)
   end
 
 end

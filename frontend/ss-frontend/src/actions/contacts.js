@@ -82,6 +82,33 @@ export function deleteContact(id) {
   }
 }
 
+export function returnState() {
+  return (dispatch, getState) => {
+    addContactToUser(getState().imageForm)
+  }
+}
+
+export function addContactToUser(formInputs) {
+  const userId = localStorage.getItem("userId")
+  debugger
+  const body = JSON.stringify({user_id: userId, name: formInputs.name.name.first, email: formInputs.email.name.first, phone: formInputs.phone.name.first, notes: formInputs.notes.name.first, company: formInputs.company.name.first})
+  return function(dispatch) {
+    const jwtToken = localStorage.getItem("jwtToken")
+    fetch(`http://localhost:3000/api/v1/contacts`, {
+      method: 'POST',
+      body: body,
+      headers: {
+        "Authorization": "Bearer" + jwtToken,
+        "Content-Type": 'application/json'
+      }
+    }).then((res) => res.json())
+    .then((json) => {
+      const contacts = json.contacts
+      dispatch(updatedContact(contacts))
+    })
+  }
+}
+
 export function shareContactOnNewsFeed(id) {
   const userId = localStorage.getItem("userId")
   const body = JSON.stringify({id: id, user_id: userId})
@@ -122,32 +149,3 @@ export function removeContactFromNewsFeed(id) {
     })
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
