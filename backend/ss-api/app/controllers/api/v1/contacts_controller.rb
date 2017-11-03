@@ -11,7 +11,7 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def create
-    if contact_params[:name] != nil
+    if params[:name] === ""
       @contact = Contact.new(contact_params)
       if @contact.save
         current_user = User.find(params[:user_id].to_i)

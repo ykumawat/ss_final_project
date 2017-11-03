@@ -90,6 +90,18 @@ export function returnState() {
 
 export function addContactToUser(formInputs) {
   const userId = localStorage.getItem("userId")
+  if (formInputs.name.length === 0 || formInputs.name) {
+    formInputs.name[0] = ""
+  }
+  if (formInputs.notes.length === 0) {
+    formInputs.notes[0] = ""
+  }
+  if (formInputs.organization.length === 0) {
+    formInputs.organization[0] = ""
+  }
+  if (formInputs.url.length === 0) {
+    formInputs.url[0] = ""
+  }
   const body = JSON.stringify({user_id: userId, name: formInputs.name[0], notes: formInputs.notes[0], company: formInputs.organization[0], url: formInputs.url})
   return function(dispatch) {
     const jwtToken = localStorage.getItem("jwtToken")

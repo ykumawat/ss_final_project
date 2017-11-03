@@ -54,7 +54,7 @@ class SlideCard extends React.Component {
       <div>
         <Card>
           <Card.Content>
-            <Image wrapped size='medium' src={slide.url}/>
+            <Image className={'contact-card'} src={slide.url}/>
             <Card.Header>
               <br/>
               {slide.topic}

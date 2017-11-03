@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import * as ContactActions from '../../actions/contacts'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import '../../index.css'
 
 class ContactCard extends React.Component {
 
@@ -76,7 +77,7 @@ class ContactCard extends React.Component {
       <div>
         <Card>
           <Card.Content>
-            <Image wrapped size='medium' src={contact.url}/>
+            <Image className={'contact-card'} wrapped size='medium' src={contact.url}/>
             <Card.Header>
               <br/>
               {contact.name}

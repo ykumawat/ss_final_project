@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Button, Icon, Image, Modal, Form } from 'semantic-ui-react'
+import '../../index.css'
 
 class UsersContainer extends React.Component {
 
@@ -9,20 +10,16 @@ class UsersContainer extends React.Component {
 
   render() {
     return (
-      <Card>
-      <Card.Content>
-      <Image src= {this.props.user.profile_image} size='small'/>
-        <Card.Header>
+      <div className={'contact-card'}>
+        <img src={this.props.user.profile_image} style={{width: '150px', margin: '0 auto'}}>
+        </img>
+        <h2>
           {this.props.user.name}
-        </Card.Header>
-      </Card.Content>
-      <Card.Content extra>
-        <Button onClick={this.handleAddFriend}>
-          <Icon name='user'/>
+        </h2>
+        <button className={'nice-button'} onClick={this.handleAddFriend} >
           Add Friend
-        </Button>
-      </Card.Content>
-      </Card>
+        </button>
+      </div>
     )
   }
 }

@@ -28,20 +28,22 @@ class NewsFeedContainer extends React.Component {
       const mappedPosts = this.props.posts.map((post) => {
         if (post[0].company) {
           return (
-              <Grid.Column>
+              <div style={{textAlign: 'center'}}>
                 <p>Name:  {post[0].name}</p>
-                <Image src={post[0].url} size='medium'/>
+                <img style={{margin: '0 auto', width: '60%'}} src={post[0].url} />
                 <p>Company:  {post[0].company}</p>
                 <p>{post[1]}</p><Button icon color='red' id="contact" value={post[0].id} onClick={this.handleLike.bind(this)}>Add</Button>
-              </Grid.Column>
+              </div>
+
+
           )} else {
             return (
-                <Grid.Column>
+                <div style={{textAlign: 'center'}}>
                   <p>Topic:  {post[0].topic}</p>
-                  <Image src={post[0].url} size='medium'/>
+                  <img style={{margin: '0 auto', width: '60%'}} src={post[0].url} size='medium'/>
                   <p>Text:  {post[0].text}</p>
                   <p>{post[1]}</p><Button icon color='red' id="slide" value={post[0].id} onClick={this.handleLike.bind(this)}>Add</Button>
-                </Grid.Column>
+                </div>
             )
           }
         }
@@ -49,21 +51,17 @@ class NewsFeedContainer extends React.Component {
 
       const mappedUsers = this.props.users.map((user) => {
         if (user === this.props.user) {
-          null
+          return (null)
         } else {
           return <UsersContainer user={user}/>
         }
       })
       return(
-        <div>
+        <Grid>
           <h2 align="center">NewsFeed</h2>
-          <Grid relaxed columns={this.props.posts.length}>
             {mappedPosts}
-          </Grid>
-          <Grid relaxed columns={this.props.users.length}>
-            {mappedUsers}
-          </Grid>
-        </div>
+        </Grid>
+
       )
     } else {
       return (

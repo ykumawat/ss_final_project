@@ -11,7 +11,7 @@ class AddNewImageForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.actions.ImageActions.fetchImageInfo(this.props.url, this.state.imageFormType)
+    this.props.actions.ImageActions.fetchImageInfo(this.props.url, this.props.formType)
   }
 
   handleInputSubmit = (event) => {
@@ -19,7 +19,7 @@ class AddNewImageForm extends React.Component {
   }
 
   handleChangeURL = (event) => {
-    this.props.changeURL()
+    this.props.actions.ImageActions.ImagechangeURL()
   }
 
   handleChangeName = (event) => {
@@ -86,13 +86,9 @@ class AddNewImageForm extends React.Component {
 
   imageType = (event) => {
     if (event.target.value === "contact") {
-      this.setState({
-        imageFormType: "contact"
-      })
+      this.props.actions.ImageActions.formType("contact")
     } else if (event.target.value === "notes") {
-      this.setState({
-        imageFormType: "notes"
-      })
+      this.props.actions.ImageActions.formType("notes")
     } else {
       null
     }
@@ -122,7 +118,7 @@ class AddNewImageForm extends React.Component {
 
         </div>
       )
-    } else if (this.state.imageFormType === "contact") {
+    } else if (this.props.formType === "contact") {
         const nameInputs = this.props.name.map(n => {
           if (n === "") {
             return (
@@ -263,7 +259,8 @@ function mapStateToProps(state) {
     notes: state.imageForm.notes,
     text: state.imageForm.text,
     contactData: state.imageForm.contactData,
-    isRendering: state.imageForm.isRendering
+    isRendering: state.imageForm.isRendering,
+    formType: state.imageForm.formType
   }
 }
 
