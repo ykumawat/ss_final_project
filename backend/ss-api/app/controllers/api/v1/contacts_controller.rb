@@ -11,14 +11,31 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(contact_params)
-    if @contact.save
-      current_user = User.find(params[:user_id].to_i)
-      contacts = current_user.contacts
-      slides = current_user.slides
-      friends = current_user.friends
-      render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
-    end
+    if params[:name] === ""
+      @contact = Contact.new(contact_params)
+      if @contact.save
+        current_user = User.find(params[:user_id].to_i)
+        contacts = current_user.contacts
+        slides = current_user.slides
+        friends = current_user.friends
+        render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
+      end
+    else
+      @contact = Contact.find(params[:id])
+      new_contact.name = @contact.name
+      new_contact.email = @contact.email
+      new_contact.phone = @contact.phone
+      new_contact.company = @contact.company
+      new_contact.url = @contact.url
+      new_contact = Contact.new(new_contact)
+        if @new_contact.save
+          current_user = User.find(params[:user_id].to_i)
+          contacts = current_user.contacts
+          slides = current_user.slides
+          friends = current_user.friends
+          render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
+        end
+      end
   end
 
   def update

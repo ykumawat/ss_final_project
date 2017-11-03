@@ -128,6 +128,8 @@ export function shareSlideOnNewsFeed(id) {
   }
 }
 
+
+
 export function removeSlideFromNewsFeed(id) {
   const userId = localStorage.getItem("userId")
   const body = JSON.stringify({id: id, user_id: userId, remove: true})
@@ -144,6 +146,26 @@ export function removeSlideFromNewsFeed(id) {
     .then((json) => {
       const slide = json.slide
       dispatch(updatedSlide(slide))
+    })
+  }
+}
+
+export function addSlideLikeToUser(slideID) {
+  const userId = localStorage.getItem("userId")
+  const body = JSON.stringify({user_id: userId, id: slideID})
+  return function(dispatch) {
+    const jwtToken = localStorage.getItem("jwtToken")
+    fetch(`http://localhost:3000/api/v1/contacts`, {
+      method: 'POST',
+      body: body,
+      headers: {
+        "Authorization": "Bearer" + jwtToken,
+        "Content-Type": 'application/json'
+      }
+    }).then((res) => res.json())
+    .then((json) => {
+      const slides = json.slides
+      dispatch(updatedSlide(slides))
     })
   }
 }

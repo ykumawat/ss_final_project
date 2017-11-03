@@ -23,20 +23,20 @@ class Api::V1::NewsfeedPostsController < ApplicationController
   end
 
   def create
-    if params[:contact_id]
-      @post = NewsfeedPost.create(user_id: params[:user_id], contact_id: params[:contact_id])
-      @contact = Contact.find(params[:id])
+    if post_params[:contact_id]
+      @post = NewsfeedPost.create(user_id: post_params[:user_id], contact_id: post_params[:contact_id])
+      @contact = Contact.find(post_params[:contact_id])
       @contact.update(shared: true)
-      current_user = User.find(params[:user_id].to_i)
+      current_user = User.find(post_params[:user_id].to_i)
       contacts = current_user.contacts
       slides = current_user.slides
       friends = current_user.friends
       render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
     else
-      @post = NewsfeedPost.create(user_id: params[:user_id], slide_id: params[:slide_id])
-      @slide = Slide.find(params[:slide_id])
+      @post = NewsfeedPost.create(user_id: post_params[:user_id], slide_id: post_params[:slide_id])
+      @slide = Slide.find(post_params[:slide_id])
       @slide.update(shared: true)
-      current_user = User.find(params[:user_id].to_i)
+      current_user = User.find(post_params[:user_id].to_i)
       contacts = current_user.contacts
       slides = current_user.slides
       friends = current_user.friends
