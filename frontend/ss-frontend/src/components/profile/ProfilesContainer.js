@@ -31,41 +31,29 @@ class ProfilesContainer extends React.Component {
       return <SlideCard slide={slide} />
     })
     return (
-      <div>
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={8}>
+        <Grid >
+          <Grid.Row columns={2}>
+            <Grid.Column>
               <h2>Welcome, {this.props.user.name}!</h2>
               <Image wrapped size='medium' src={this.props.user.profile_image} bordered/>
             </Grid.Column>
-            <Grid.Column width={8}>
-              <NewsFeed/>
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column width={8}>
+            <Grid.Column>
               <Grid.Row>
                 You have {this.props.contacts.length} contacts:
-                <br/>
                 <Modal trigger={<Button>Show</Button>}>
                   {ContactList}
                 </Modal>
               </Grid.Row>
               <Grid.Row>
                 You have {this.props.slides.length} notes:
-                <br/>
                 <Modal trigger={<Button>Show</Button>}>
                   {SlideList}
                 </Modal>
               </Grid.Row>
             </Grid.Column>
-            <Grid.Column width={8}>
-              <MeetUp/>
-            </Grid.Column>
           </Grid.Row>
+            <NewsFeed/>
         </Grid>
-      </div>
     )
   }
 

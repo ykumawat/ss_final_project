@@ -11,6 +11,13 @@ function renderToUser() {
   }
 }
 
+export function formType(formType) {
+  return {
+    type: "FORM_TYPE",
+    payload: formType
+  }
+}
+
 export function changeURL() {
   return {
     type: "CHANGING_URL"

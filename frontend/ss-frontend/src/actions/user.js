@@ -18,6 +18,13 @@ function signOutUser() {
   }
 }
 
+function loadedUsers(users) {
+  return {
+    type: "USERS_LOADED",
+    payload: users
+  }
+}
+
 
 export function loginUser(email, password) {
   const body = JSON.stringify({email: email, password: password})
@@ -45,7 +52,7 @@ export function loginUser(email, password) {
 }
 
 export function signupUser(email, password, image, name, zipcode) {
-  const body = JSON.stringify({email: email, password: password, image: image, name: name, zipcode: zipcode})
+  const body = JSON.stringify({email: email, password: password, profile_image: image, name: name, zipcode: zipcode})
   return function(dispatch) {
     fetch("http://localhost:3000/api/v1/users", {
       method: 'POST',
@@ -66,6 +73,23 @@ export function signupUser(email, password, image, name, zipcode) {
       }).catch((error) => console.log("SIGN UP FAILED", error))
   }
 
+}
+
+export function loadUsers() {
+  const jwtToken = localStorage.getItem("jwtToken")
+  return function(dispatch) {
+    fetch(`http://localhost:3000/api/v1/users`, {
+      method: 'GET',
+      headers: {
+        "Authorization": "Bearer" + jwtToken,
+        "Content-Type": 'application/json'
+      }
+    }).then((res) => res.json())
+    .then((json) => {
+      const users = json
+      dispatch(loadedUsers(users))
+    })
+  }
 }
 
 export function logoutUser(user){

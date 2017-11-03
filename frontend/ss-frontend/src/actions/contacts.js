@@ -90,6 +90,18 @@ export function returnState() {
 
 export function addContactToUser(formInputs) {
   const userId = localStorage.getItem("userId")
+  if (formInputs.name.length === 0 || formInputs.name) {
+    formInputs.name[0] = ""
+  }
+  if (formInputs.notes.length === 0) {
+    formInputs.notes[0] = ""
+  }
+  if (formInputs.organization.length === 0) {
+    formInputs.organization[0] = ""
+  }
+  if (formInputs.url.length === 0) {
+    formInputs.url[0] = ""
+  }
   const body = JSON.stringify({user_id: userId, name: formInputs.name[0], notes: formInputs.notes[0], company: formInputs.organization[0], url: formInputs.url})
   return function(dispatch) {
     const jwtToken = localStorage.getItem("jwtToken")
@@ -136,6 +148,27 @@ export function removeContactFromNewsFeed(id) {
     const jwtToken = localStorage.getItem("jwtToken")
     fetch(`http://localhost:3000/api/v1/contacts/${id}`, {
       method: 'PATCH',
+      body: body,
+      headers: {
+        "Authorization": "Bearer" + jwtToken,
+        "Content-Type": 'application/json'
+      }
+    }).then((res) => res.json())
+    .then((json) => {
+      const contacts = json.contacts
+      dispatch(updatedContact(contacts))
+    })
+  }
+}
+
+
+export function addContactLikeToUser(contactID) {
+  const userId = localStorage.getItem("userId")
+  const body = JSON.stringify({user_id: userId, id: contactID})
+  return function(dispatch) {
+    const jwtToken = localStorage.getItem("jwtToken")
+    fetch(`http://localhost:3000/api/v1/contacts`, {
+      method: 'POST',
       body: body,
       headers: {
         "Authorization": "Bearer" + jwtToken,

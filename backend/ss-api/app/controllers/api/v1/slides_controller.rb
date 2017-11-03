@@ -11,13 +11,30 @@ class Api::V1::SlidesController < ApplicationController
   end
 
   def create
-    @slide = Slide.new(slide_params)
-    if @slide.save
-      current_user = User.find(params[:user_id].to_i)
-      contacts = current_user.contacts
-      slides = current_user.slides
-      friends = current_user.friends
-      render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
+    byebug
+    if slide_params[:topic] != nil
+      @slide = Slide.new(slide_params)
+      if @slide.save
+        current_user = User.find(params[:user_id].to_i)
+        contacts = current_user.contacts
+        slides = current_user.slides
+        friends = current_user.friends
+        render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
+      end
+    else
+      @slide = Slide.find(params[:id])
+      new_slide.topic = @slide.topic
+      new_slide.text = @slide.text
+      new_slide.url = @slide.url
+      new_slide.user_id = params[:user_id]
+      new_slide = Slide.new(new_slide)
+        if @new_slide.save
+          current_user = User.find(params[:user_id].to_i)
+          contacts = current_user.contacts
+          slides = current_user.slides
+          friends = current_user.friends
+          render json: {user: current_user, contacts: contacts, slides: slides, friends: friends}, status: 201
+        end
     end
   end
 
